@@ -1,0 +1,26 @@
+
+
+.tab-pane .tab-header-area .tab-header-background, .tab-pane {
+    -fx-background-color: linear-gradient(#222222, #262626);
+}
+
+.tab-content-area, .bg {
+    -fx-background-color: #262626;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: linear-gradient(#ff9933, #ff8733);
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #404040;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #222222;
+    -fx-font-weight: bold;
+}

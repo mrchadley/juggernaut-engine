@@ -7,20 +7,41 @@
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.control.TextArea?>
 <?import java.net.URL?>
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="juggernaut.Controller">
+
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.canvas.Canvas?>
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.Controller">
+    <top>
+        <MenuBar fx:id="menuBar">
+            <menus>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="New"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Open"/>
+                        <MenuItem text="Save"/>
+                        <MenuItem text="Save As"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Exit"/>
+                    </items>
+                </Menu>
+                <Menu text="Edit"></Menu>
+                <Menu text="GameObject"></Menu>
+                <Menu text="Tools"></Menu>
+                <Menu text="Window"></Menu>
+                <Menu text="Help"></Menu>
+            </menus>
+        </MenuBar>
+    </top>
     <center>
         <TabPane>
             <tabs>
-                <Tab fx.id="tab1" closable="true" text="SplitPane">
+                <Tab fx:id="tab1" closable="true" text="Scene Editor">
                     <content>
-                        <SplitPane dividerPositions="0.25">
-                            <items>
-                                <TreeView fx:id="projectTreeView">
-                                </TreeView>
 
-                                <TextArea fx:id="editor" styleClass="code"/>
-                            </items>
-                        </SplitPane>
                     </content>
                 </Tab>
             </tabs>
