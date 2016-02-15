@@ -6,3 +6,6 @@ i.e. the game loop, and all other systems essential for the engine
 
 
 https://www.youtube.com/watch?v=DXT11ZbB2Mk&list=PLWms45O3n--54U-22GDqKMRGlXROOZtMx&index=1
+http://www.java-gaming.org/index.php/topic,24220.0
+http://stackoverflow.com/questions/18283199/java-main-game-loop
+http://gamedevelopment.tutsplus.com/tutorials/introduction-to-javafx-for-game-development--cms-23835
