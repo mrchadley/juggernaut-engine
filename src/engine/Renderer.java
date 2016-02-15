@@ -5,6 +5,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.paint.Color;
 
 public class Renderer
@@ -27,6 +29,7 @@ public class Renderer
         canvas.widthProperty().setValue(width);
         canvas.heightProperty().setValue(height);
 
+
         root = new Group();
         scene = new Scene(root, width, height);
         root.getChildren().add(canvas);
@@ -36,8 +39,11 @@ public class Renderer
 
     public void draw() //iterate through list of drawObjects and call their draw functions
     {
+        gc.setFill(Color.web("#232329"));
+        gc.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
+
         testInt++;
-        gc.setStroke(Color.BLUE);
+        gc.setFill(Color.web("#ffaa00"));
         gc.fillRect(50 + testInt, 50, 100, 75);
 
         //rectangle

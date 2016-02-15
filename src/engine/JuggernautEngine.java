@@ -5,11 +5,17 @@ of the engine.
 */
 package engine;
 
+import engine.framework.GameObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 //figure out a way to pass screen width and height as well as the title and framerate as command line arguments
 public class JuggernautEngine extends Application
@@ -25,6 +31,8 @@ public class JuggernautEngine extends Application
 
     private float timeFirst;
     private float timeLast;
+
+    private List<GameObject> gameObjects;
 
     @Override
     public void start(Stage primaryStage) throws Exception
