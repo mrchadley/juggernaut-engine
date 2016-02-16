@@ -90,7 +90,7 @@ public class JuggernautEngine extends Application
         Oval circle = new Oval(new Vector2(500, 50), new Vector2(70,70), Color.web("#ffaa00"));
         ovals[0] = circle;
 
-        Sprite sprite = new Sprite(new Vector2(400, 200), new Vector2(200, 175), new Image("engine/images/PhandroidRobotPlain.PNG"));
+        Sprite sprite = new Sprite(new Vector2(400, 200), new Vector2(320, 200), new Image("engine/images/PhandroidRobotPlain.PNG"));
 
         sprites[0] = sprite;
 
