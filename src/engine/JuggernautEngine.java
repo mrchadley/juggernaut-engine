@@ -5,17 +5,21 @@ of the engine.
 */
 package engine;
 
+import engine.framework.Vector2;
 import engine.framework.GameObject;
+import engine.framework.Sprite;
+import engine.framework.basic_shapes.Oval;
+import engine.framework.basic_shapes.Rectangle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.LinkedList;
+
 
 //figure out a way to pass screen width and height as well as the title and framerate as command line arguments
 public class JuggernautEngine extends Application
@@ -32,7 +36,11 @@ public class JuggernautEngine extends Application
     private float timeFirst;
     private float timeLast;
 
-    private List<GameObject> gameObjects;
+    Oval[] ovals;
+    Rectangle[] rectangles ;
+    Sprite[] sprites;
+
+    LinkedList<GameObject> objects = new LinkedList<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception
@@ -43,18 +51,20 @@ public class JuggernautEngine extends Application
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
+        InitializeGameObjects();
 
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(framerate),
                 (event) ->{
-                    timeFirst = System.nanoTime() / 1000000000.0f;
+                    timeFirst = System.nanoTime();
                     deltaTime = timeFirst - timeLast;
                     timeLast = timeFirst;
 
 
+
                     //update everything here
                     renderer.clear();
-                    renderer.draw();
+                    renderer.draw(objects);
                 });
         gameLoop.getKeyFrames().add(kf);
         gameLoop.play();
@@ -66,5 +76,26 @@ public class JuggernautEngine extends Application
     public static void main(String[] args)
     {
         launch(args);
+    }
+
+    public void InitializeGameObjects()
+    {
+        rectangles = new Rectangle[1];
+        ovals = new Oval[1];
+        sprites = new Sprite[1];
+
+        Rectangle rect = new Rectangle(new Vector2(50, 50), new Vector2(150, 250), Color.GOLDENROD);
+        rectangles[0] = rect;
+
+        Oval circle = new Oval(new Vector2(500, 50), new Vector2(70,70), Color.web("#ffaa00"));
+        ovals[0] = circle;
+
+        Sprite sprite = new Sprite(new Vector2(400, 200), new Vector2(200, 175), new Image("engine/images/PhandroidRobotPlain.PNG"));
+
+        sprites[0] = sprite;
+
+        objects.add(rect);
+        objects.add(circle);
+        objects.add(sprite);
     }
 }

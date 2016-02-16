@@ -1,30 +1,29 @@
 package engine.framework;
 
-
+import engine.framework.Vector2;
+import javafx.scene.canvas.GraphicsContext;
 
 public abstract class GameObject
 {
     protected Vector2 position;
     protected Vector2 velocity = Vector2.zero();
+    protected Vector2 size;
 
-    protected ObjectId id;
-
-    public GameObject(float x, float y, ObjectId id)
+    public GameObject(Vector2 position, Vector2 size)
     {
-        position.setX(x);
-        position.setY(y);
-        this.id = id;
+        this.setPosition(position);
+        this.setSize(size);
     }
 
     public abstract void update();
-    public abstract void draw();
+    public abstract void draw(GraphicsContext gc);
 
     public abstract Vector2 getPosition();
     public abstract Vector2 getVelocity();
-    public abstract ObjectId getId();
+    public abstract Vector2 getSize();
 
     public abstract void setPosition(Vector2 position);
-    public abstract void setPosition(float x, float y);
     public abstract void setVelocity(Vector2 velocity);
-    public abstract void setVelocity(float x, float y);
+    public abstract void setSize(Vector2 size);
+
 }
