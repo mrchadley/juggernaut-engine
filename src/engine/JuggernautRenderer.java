@@ -1,16 +1,18 @@
 package engine;
 
 import engine.framework.GameObject;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
 import java.util.LinkedList;
 
-public class Renderer
+public class JuggernautRenderer
 {
     @FXML
     private Canvas canvas;
@@ -24,16 +26,16 @@ public class Renderer
 
     //private list of drawObjects
 
-    public Renderer(int width, int height)
+    public JuggernautRenderer(int width, int height)
     {
         canvas = new Canvas();
         canvas.widthProperty().setValue(width);
         canvas.heightProperty().setValue(height);
 
-
         root = new Group();
         scene = new Scene(root, width, height);
         root.getChildren().add(canvas);
+
 
         gc = canvas.getGraphicsContext2D();
     }
@@ -62,4 +64,5 @@ public class Renderer
     {
         return gc;
     }
+
 }
