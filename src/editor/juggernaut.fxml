@@ -41,6 +41,15 @@
     </center>
     <right>
         <SplitPane orientation="VERTICAL">
+            <VBox prefWidth="300" styleClass="properties">
+                <HBox>
+                    <TextField fx:id="x" text="0" prefWidth="60"/>
+                    <TextField fx:id="y" text="0" prefWidth="60"/>
+                    <TextField fx:id="w" text="0" prefWidth="60"/>
+                    <TextField fx:id="h" text="0" prefWidth="60"/>
+                    <Button onAction="#addObject" fx:id="add" text="add" prefWidth="60" />
+                </HBox>
+            </VBox>
             <TabPane>
                 <tabs>
                     <Tab text="Project" fx:id="ProjectTab">
@@ -55,17 +64,13 @@
                     </Tab>
                 </tabs>
             </TabPane>
-            <VBox prefWidth="300" styleClass="properties">
-                <HBox>
-                    <TextField fx:id="x" text="0" prefWidth="60"/>
-                    <TextField fx:id="y" text="0" prefWidth="60"/>
-                    <TextField fx:id="w" text="0" prefWidth="60"/>
-                    <TextField fx:id="h" text="0" prefWidth="60"/>
-                    <Button onAction="#addObject" fx:id="add" text="add" prefWidth="60" />
-                </HBox>
-            </VBox>
         </SplitPane>
     </right>
+    <bottom>
+        <HBox fx:id="DebugBar" prefHeight="30">
+            <Label text="Debugging..."/>
+        </HBox>
+    </bottom>
     <stylesheets>
         <URL value="@juggernaut-style.css"/>
     </stylesheets>
