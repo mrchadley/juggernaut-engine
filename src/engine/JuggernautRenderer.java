@@ -14,7 +14,6 @@ import java.util.LinkedList;
 
 public class JuggernautRenderer
 {
-    @FXML
     private Canvas canvas;
 
     private Scene scene;
