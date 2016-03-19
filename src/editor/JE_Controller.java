@@ -9,6 +9,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
@@ -16,13 +17,14 @@ import javafx.scene.paint.Color;
 public class JE_Controller
 {
     @FXML private Canvas levelEditorCanvas;
+    @FXML private Canvas layer;
     @FXML private BorderPane layout;
     @FXML private TextField x;
     @FXML private TextField y;
     @FXML private TextField w;
     @FXML private TextField h;
     @FXML private Button add;
-    @FXML private AnchorPane anchor;
+    @FXML private BorderPane border;
 
     private boolean running = false;
     private JE_Renderer renderer = JE_Renderer.GetInstance();
@@ -34,9 +36,8 @@ public class JE_Controller
 
     public void initialize()
     {
-        levelEditorCanvas.widthProperty().bind(anchor.widthProperty());
-        levelEditorCanvas.heightProperty().bind(anchor.heightProperty());
-
+        levelEditorCanvas.widthProperty().bind(border.widthProperty());
+        levelEditorCanvas.heightProperty().bind(border.heightProperty());
 
         renderer.SetCanvas(levelEditorCanvas);
         renderer.SetLevel(level);

@@ -35,9 +35,9 @@
         </MenuBar>
     </top>
     <center>
-        <AnchorPane fx:id="anchor">
-            <Canvas AnchorPane.leftAnchor="0.0" fx:id="levelEditorCanvas" width="1000" height="800"/>
-        </AnchorPane>
+        <BorderPane fx:id="border">
+            <Canvas BorderPane.alignment="CENTER_RIGHT" fx:id="levelEditorCanvas"/>
+        </BorderPane>
     </center>
     <right>
         <VBox prefWidth="300" styleClass="properties">
