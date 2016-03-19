@@ -3,9 +3,9 @@ This class contains the window and main game loop
 as well as calls to the updates of all other systems
 of the engine.
 */
-package engine;
+package juggernaut_engine;
 
-import engine.framework.GameObject;
+import juggernaut_engine.framework.GameObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;

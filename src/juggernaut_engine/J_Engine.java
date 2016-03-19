@@ -1,14 +1,10 @@
 package juggernaut_engine;
 
-import engine.JuggernautInitializer;
-import engine.JuggernautRenderer;
-import engine.framework.GameObject;
-import engine.framework.Vector2;
+import juggernaut_engine.framework.GameObject;
+import juggernaut_engine.framework.Vector2;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;

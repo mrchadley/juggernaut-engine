@@ -1,7 +1,5 @@
-package engine.framework;
+package juggernaut_engine.framework;
 
-import engine.framework.GameObject;
-import engine.framework.Vector2;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 

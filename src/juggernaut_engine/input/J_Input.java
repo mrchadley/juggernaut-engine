@@ -1,6 +1,6 @@
 package juggernaut_engine.input;
 
-import engine.framework.Vector2;
+import juggernaut_engine.framework.Vector2;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 

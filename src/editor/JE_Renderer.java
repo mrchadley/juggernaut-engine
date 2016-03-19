@@ -1,6 +1,6 @@
 package editor;
 
-import engine.framework.GameObject;
+import juggernaut_engine.framework.GameObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
@@ -9,7 +9,6 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import juggernaut_engine.J_Logger;
 
-import java.util.LinkedList;
 
 public class JE_Renderer
 {

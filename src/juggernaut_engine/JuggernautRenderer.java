@@ -1,13 +1,10 @@
-package engine;
+package juggernaut_engine;
 
-import engine.framework.GameObject;
-import javafx.event.EventType;
-import javafx.fxml.FXML;
+import juggernaut_engine.framework.GameObject;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
 import java.util.LinkedList;

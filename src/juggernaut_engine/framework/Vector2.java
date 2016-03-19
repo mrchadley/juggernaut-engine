@@ -1,4 +1,4 @@
-package engine.framework;
+package juggernaut_engine.framework;
 
 public class Vector2
 {

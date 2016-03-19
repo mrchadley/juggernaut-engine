@@ -40,29 +40,31 @@
         </BorderPane>
     </center>
     <right>
-        <TabPane>
-            <tabs>
-                <Tab text="Project" fx:id="ProjectTab">
-                    <content>
+        <SplitPane orientation="VERTICAL">
+            <TabPane>
+                <tabs>
+                    <Tab text="Project" fx:id="ProjectTab">
+                        <content>
 
-                    </content>
-                </Tab>
-                <Tab text="Outliner" fx:id="OutlinerTab">
-                    <content>
+                        </content>
+                    </Tab>
+                    <Tab text="Outliner" fx:id="OutlinerTab">
+                        <content>
 
-                    </content>
-                </Tab>
-            </tabs>
-        </TabPane>
-        <VBox prefWidth="300" styleClass="properties">
-            <HBox>
-                <TextField fx:id="x" text="0" prefWidth="60"/>
-                <TextField fx:id="y" text="0" prefWidth="60"/>
-                <TextField fx:id="w" text="0" prefWidth="60"/>
-                <TextField fx:id="h" text="0" prefWidth="60"/>
-                <Button onAction="#addObject" fx:id="add" text="add" prefWidth="60" />
-            </HBox>
-        </VBox>
+                        </content>
+                    </Tab>
+                </tabs>
+            </TabPane>
+            <VBox prefWidth="300" styleClass="properties">
+                <HBox>
+                    <TextField fx:id="x" text="0" prefWidth="60"/>
+                    <TextField fx:id="y" text="0" prefWidth="60"/>
+                    <TextField fx:id="w" text="0" prefWidth="60"/>
+                    <TextField fx:id="h" text="0" prefWidth="60"/>
+                    <Button onAction="#addObject" fx:id="add" text="add" prefWidth="60" />
+                </HBox>
+            </VBox>
+        </SplitPane>
     </right>
     <stylesheets>
         <URL value="@juggernaut-style.css"/>

@@ -1,6 +1,6 @@
-package engine.framework.basic_shapes;
+package juggernaut_engine.framework.basic_shapes;
 
-import engine.framework.Vector2;
+import juggernaut_engine.framework.Vector2;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 

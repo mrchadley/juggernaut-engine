@@ -1,8 +1,8 @@
 package editor;
 
-import engine.framework.Vector2;
-import engine.framework.basic_shapes.Oval;
-import engine.framework.basic_shapes.Rectangle;
+import juggernaut_engine.framework.Vector2;
+import juggernaut_engine.framework.basic_shapes.Oval;
+import juggernaut_engine.framework.basic_shapes.Rectangle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
