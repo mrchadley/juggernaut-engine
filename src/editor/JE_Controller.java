@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
@@ -25,6 +27,8 @@ public class JE_Controller
     @FXML private TextField h;
     @FXML private Button add;
     @FXML private BorderPane border;
+    @FXML private Tab ProjectTab;
+    @FXML private Tab OutlinerTab;
 
     private boolean running = false;
     private JE_Renderer renderer = JE_Renderer.GetInstance();

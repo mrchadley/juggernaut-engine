@@ -40,6 +40,20 @@
         </BorderPane>
     </center>
     <right>
+        <TabPane>
+            <tabs>
+                <Tab text="Project" fx:id="ProjectTab">
+                    <content>
+
+                    </content>
+                </Tab>
+                <Tab text="Outliner" fx:id="OutlinerTab">
+                    <content>
+
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
         <VBox prefWidth="300" styleClass="properties">
             <HBox>
                 <TextField fx:id="x" text="0" prefWidth="60"/>
