@@ -1,15 +1,12 @@
 package editor;
 
+import javafx.scene.control.*;
 import juggernaut_engine.framework.Vector2;
 import juggernaut_engine.framework.basic_shapes.Oval;
 import juggernaut_engine.framework.basic_shapes.Rectangle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
@@ -29,6 +26,7 @@ public class JE_Controller
     @FXML private BorderPane border;
     @FXML private Tab ProjectTab;
     @FXML private Tab OutlinerTab;
+    @FXML private TreeView<String> locationTreeView;
 
     private boolean running = false;
     private JE_Renderer renderer = JE_Renderer.GetInstance();
@@ -43,9 +41,21 @@ public class JE_Controller
         levelEditorCanvas.widthProperty().bind(border.widthProperty());
         levelEditorCanvas.heightProperty().bind(border.heightProperty());
 
+        loadTreeItems("Folder1", "Folder2", "Folder3");
+
         renderer.SetCanvas(levelEditorCanvas);
         renderer.SetLevel(level);
         level.AddObject(test);
+    }
+
+    public void loadTreeItems(String... rootItems) {
+        TreeItem<String> root = new TreeItem<String>("Project");
+        root.setExpanded(true);
+        for (String itemString: rootItems) {
+            root.getChildren().add(new TreeItem<String>(itemString));
+        }
+
+        locationTreeView.setRoot(root);
     }
 
     public void addObject(ActionEvent actionEvent)
