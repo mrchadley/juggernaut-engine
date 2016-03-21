@@ -11,8 +11,8 @@ public class Oval extends Shape {
     }
 
 
-    public void update() {
-
+    public void update(float dt) {
+        super.update(dt);
     }
 
     public void draw(GraphicsContext gc) {

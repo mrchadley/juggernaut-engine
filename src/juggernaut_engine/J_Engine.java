@@ -96,12 +96,12 @@ public abstract class J_Engine extends Application
         //input.Update();
         if(input.GetKeyDown(KeyCode.A))
         {
-            J_Logger.debug("test", "pressing a");
+            J_Log.debug("test", "pressing a");
             objects.get(2).setPosition(objects.get(2).getPosition().add(new Vector2(-5,0)));
         }
         if(input.GetKeyDown(KeyCode.D))
         {
-            J_Logger.debug("test", "pressing a");
+            J_Log.debug("test", "pressing a");
             objects.get(2).setPosition(objects.get(2).getPosition().add(new Vector2(5,0)));
         }
     }

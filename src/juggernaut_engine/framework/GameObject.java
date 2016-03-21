@@ -16,7 +16,10 @@ public abstract class GameObject
         this.center = this.size.multiply(0.5f);
     }
 
-    public abstract void update();
+    public void update(float dt)
+    {
+        position = position.add(velocity.multiply(dt));
+    }
     public abstract void draw(GraphicsContext gc);
 
     public abstract Vector2 getPosition();

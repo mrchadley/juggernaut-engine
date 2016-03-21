@@ -7,7 +7,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import juggernaut_engine.J_Logger;
+import juggernaut_engine.J_Log;
 
 
 public class JE_Renderer
@@ -23,12 +23,12 @@ public class JE_Renderer
 
     private JE_Renderer()
     {
-        J_Logger.debug("sceneview", "initializing");
+        J_Log.debug("sceneview", "initializing");
         editorLoop.setCycleCount(Timeline.INDEFINITE);
         tick = new KeyFrame(Duration.millis(180), event ->
         {
             Draw();
-            J_Logger.debug("sceneview", "looping");
+            J_Log.debug("sceneview", "looping");
         });
         editorLoop.getKeyFrames().add(tick);
     }
