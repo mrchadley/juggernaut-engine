@@ -45,6 +45,8 @@ public class JE_Renderer
     {
         editorLoop.play();
     }
+
+
     public void Draw()
     {
         gc.clearRect(0,0, canvas.getWidth(), canvas.getHeight());

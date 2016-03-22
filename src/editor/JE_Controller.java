@@ -1,5 +1,9 @@
 package editor;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import juggernaut_engine.framework.Vector2;
 import juggernaut_engine.framework.basic_shapes.Oval;
@@ -11,11 +15,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-
+import javafx.scene.control.ComboBox;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class JE_Controller
@@ -32,8 +39,11 @@ public class JE_Controller
     @FXML private Tab ProjectTab;
     @FXML private Tab OutlinerTab;
     @FXML private TreeView<File> locationTreeView;
+    @FXML private ComboBox<String> colorCombo;
 
 
+    private Color selectedColor;
+    Map<String, Color> colors = new HashMap<String, Color>();
     private boolean running = false;
     private JE_Renderer renderer = JE_Renderer.GetInstance();
     private J_Level level = new J_Level();
@@ -53,7 +63,7 @@ public class JE_Controller
         renderer.SetCanvas(levelEditorCanvas);
         renderer.SetLevel(level);
         level.AddObject(test);
-    }
+     }
 
 
     public void loadTreeItems(File dir) {
@@ -79,14 +89,23 @@ public class JE_Controller
     }
 
 
+    public void test(ActionEvent actionEvent) {
+
+    }
+
     public void addObject(ActionEvent actionEvent)
     {
         float _x = Float.parseFloat(x.getText());
         float _y = Float.parseFloat(y.getText());
         float _w = Float.parseFloat(w.getText());
         float _h = Float.parseFloat(h.getText());
-        Rectangle newObj = new Rectangle(new Vector2(_x, _y), new Vector2(_w, _h), Color.DARKCYAN);
+        String _c = colorCombo.getValue().toLowerCase();
+        // NEED MORE COLORS
+        colors.put("red", Color.RED);
+        colors.put("blue", Color.BLUE);
+        colors.put("green", Color.GREEN);
 
+        Rectangle newObj = new Rectangle(new Vector2(_x, _y), new Vector2(_w, _h), colors.get(_c.toLowerCase()));
         x.clear();
         x.setText("0");
         y.clear();

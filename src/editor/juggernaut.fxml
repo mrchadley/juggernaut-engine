@@ -4,6 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <BorderPane fx:id="layout" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.JE_Controller">
     <top>
         <MenuBar fx:id="menuBar">
@@ -47,6 +49,15 @@
                     <TextField fx:id="y" text="0" prefWidth="60"/>
                     <TextField fx:id="w" text="0" prefWidth="60"/>
                     <TextField fx:id="h" text="0" prefWidth="60"/>
+                    <ComboBox fx:id="colorCombo" layoutX="15.0" layoutY="33.0" prefWidth="90.0" promptText="choose">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Red"/>
+                                <String fx:value="Blue"/>
+                                <String fx:value="Green"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
                     <Button onAction="#addObject" fx:id="add" text="add" prefWidth="60" />
                 </HBox>
                 <Button text="Play" onAction="#test"/>
