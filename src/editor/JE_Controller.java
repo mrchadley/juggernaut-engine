@@ -1,5 +1,6 @@
 package editor;
 
+import engine.TestGame;
 import javafx.scene.control.*;
 import juggernaut_engine.framework.Vector2;
 import juggernaut_engine.framework.basic_shapes.Oval;
@@ -11,6 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+
+import java.io.IOException;
 
 
 public class JE_Controller
@@ -76,5 +79,12 @@ public class JE_Controller
         h.setText("0");
 
         level.AddObject(newObj);
+    }
+    public void test(ActionEvent actionEvent)
+    {
+        try {
+            Process game = new ProcessBuilder("C:\\Windows\\System32\\notepad.exe").start();
+        }
+        catch(IOException e){}
     }
 }
