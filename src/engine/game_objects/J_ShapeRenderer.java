@@ -6,15 +6,13 @@ public class J_ShapeRenderer extends J_RendererComponent
 {
     public enum Shape
     {
-        RECTANGLE("Rectangle", 0),
-        OVAL("Oval", 1);
+        RECTANGLE(0),
+        OVAL(1);
 
-        private String name;
         private int shape;
 
-        private Shape(String name, int shape)
+        private Shape(int shape)
         {
-            this.name = name;
             this.shape = shape;
         }
     }
@@ -23,7 +21,9 @@ public class J_ShapeRenderer extends J_RendererComponent
         super(transform);
     }
     @Override
-    public void Draw(GraphicsContext gc) {
+    public void Draw(GraphicsContext gc)
+    {
+
 
     }
 
