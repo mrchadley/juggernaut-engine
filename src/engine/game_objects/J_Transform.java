@@ -23,6 +23,24 @@ public class J_Transform extends J_Component {
         position = positionCenter.add(size.multiply(-0.5f));
     }
 
+    public Vector2 GetPosition()
+    {
+        return positionCenter;
+    }
+
+    public Vector2 GetLocalPosition()
+    {
+        return localPosition;
+    }
+    public J_Transform GetParent()
+    {
+        return parent;
+    }
+    public LinkedList<J_Transform> GetChildren()
+    {
+        return children;
+    }
+
     @Override
     public void Update(float dt)
     {
@@ -74,5 +92,10 @@ public class J_Transform extends J_Component {
             return parent.positionCenter.subtract(child.positionCenter);
         else
             return child.positionCenter;
+    }
+
+    public void DisplayProperties()
+    {
+
     }
 }

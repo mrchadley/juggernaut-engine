@@ -5,7 +5,7 @@ package engine.game_objects;
  */
 public abstract class J_Component
 {
-    public void Initialize()
-    {}
     public abstract void Update(float dt);
+
+    public abstract void DisplayProperties();
 }
