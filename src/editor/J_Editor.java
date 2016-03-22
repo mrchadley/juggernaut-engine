@@ -28,20 +28,6 @@ public class J_Editor extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("juggernaut.fxml"));
 
-        /*/////////////////////////////////////////////////////////////// To be implemented to editor
-        TreeItem<String> rootItem = new TreeItem<String> ("Outliner");
-        rootItem.setExpanded(true);
-        for (int i = 1; i < 6; i++) {
-            TreeItem<String> item = new TreeItem<String> ("Layer" + i);
-            rootItem.getChildren().add(item);
-        }
-        TreeView<String> tree = new TreeView<String> (rootItem);
-        StackPane root1 = new StackPane();
-        root1.getChildren().add(tree);
-        //primaryStage.setScene(new Scene(root1, 300, 250));
-        //primaryStage.show();
-        /////////////////////////////////////////////////////////////// */
-
         JE_Renderer.GetInstance().Run();
 
         primaryStage.setTitle("Juggernaut Engine [Editor]");

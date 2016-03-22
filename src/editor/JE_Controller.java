@@ -12,6 +12,11 @@ import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 
 public class JE_Controller
 {
@@ -26,7 +31,8 @@ public class JE_Controller
     @FXML private BorderPane border;
     @FXML private Tab ProjectTab;
     @FXML private Tab OutlinerTab;
-    @FXML private TreeView<String> locationTreeView;
+    @FXML private TreeView<File> locationTreeView;
+
 
     private boolean running = false;
     private JE_Renderer renderer = JE_Renderer.GetInstance();
@@ -41,22 +47,37 @@ public class JE_Controller
         levelEditorCanvas.widthProperty().bind(border.widthProperty());
         levelEditorCanvas.heightProperty().bind(border.heightProperty());
 
-        loadTreeItems("Folder1", "Folder2", "Folder3");
+        File currentDir = new File("src/"); // current directory
+        loadTreeItems(currentDir);
 
         renderer.SetCanvas(levelEditorCanvas);
         renderer.SetLevel(level);
         level.AddObject(test);
     }
 
-    public void loadTreeItems(String... rootItems) {
-        TreeItem<String> root = new TreeItem<String>("Project");
-        root.setExpanded(true);
-        for (String itemString: rootItems) {
-            root.getChildren().add(new TreeItem<String>(itemString));
-        }
 
-        locationTreeView.setRoot(root);
+    public void loadTreeItems(File dir) {
+        TreeItem<File> root = new TreeItem<>(new File("Files:"));
+        root.setExpanded(true);
+        try {
+            File[] files = dir.listFiles();
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    System.out.println("directory:" + file.getCanonicalPath());
+                    loadTreeItems(file);
+                } else {
+                    System.out.println("     file:" + file.getCanonicalPath());
+                    root.getChildren().add(new TreeItem<>(file));
+                }
+                root.getChildren().add(new TreeItem<>(file));
+            }
+
+            locationTreeView.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     public void addObject(ActionEvent actionEvent)
     {
