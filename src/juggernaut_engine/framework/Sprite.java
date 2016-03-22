@@ -1,7 +1,10 @@
 package juggernaut_engine.framework;
 
+import engine.J_InputHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 
 public class Sprite extends GameObject
 {
@@ -12,8 +15,14 @@ public class Sprite extends GameObject
         this.image = image;
     }
 
-    public void update() {
+    public void update(float dt)
+    {
+        if(J_InputHandler.GetInstance().GetKey(KeyCode.D))
+        {
+            velocity = new Vector2(30, velocity.getY());
+        }
 
+        super.update(dt);
     }
 
     public void draw(GraphicsContext gc)

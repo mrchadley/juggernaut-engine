@@ -2,7 +2,7 @@ package juggernaut_engine;
 
 import java.io.PrintStream;
 
-public class J_Logger
+public class J_Log
 {
     public enum Level
     {
@@ -51,27 +51,27 @@ public class J_Logger
 
     public static Level GetMinPriorityLevel()
     {
-        return J_Logger.MIN_LEVEL;
+        return J_Log.MIN_LEVEL;
     }
     public static synchronized void SetMinPriorityLevel(Level level)
     {
-        J_Logger.MIN_LEVEL = level;
+        J_Log.MIN_LEVEL = level;
     }
 
     public static PrintStream GetPrintStream()
     {
-        return J_Logger.P_STREAM;
+        return J_Log.P_STREAM;
     }
     public static synchronized void SetPrintStream(PrintStream pStream)
     {
-        J_Logger.P_STREAM = pStream;
+        J_Log.P_STREAM = pStream;
     }
 
     public static synchronized void LogMessage(Level level, String module, String message)
     {
         if(level.GetPriority() >= MIN_LEVEL.GetPriority())
         {
-            String logMessage = level.GetName() + " (" + module + "): \n" + message;
+            String logMessage = level.GetName() + "(" + module + "): " + message;
 
             if(P_STREAM == null)
             {

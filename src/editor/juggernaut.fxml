@@ -35,9 +35,9 @@
         </MenuBar>
     </top>
     <center>
-        <BorderPane fx:id="border">
-            <Canvas BorderPane.alignment="CENTER_RIGHT" fx:id="levelEditorCanvas"/>
-        </BorderPane>
+            <BorderPane fx:id="border">
+                <Canvas BorderPane.alignment="CENTER_RIGHT" fx:id="levelEditorCanvas"/>
+            </BorderPane>
     </center>
     <right>
         <SplitPane orientation="VERTICAL" >
@@ -49,6 +49,7 @@
                     <TextField fx:id="h" text="0" prefWidth="60"/>
                     <Button onAction="#addObject" fx:id="add" text="add" prefWidth="60" />
                 </HBox>
+                <Button text="Play" onAction="#test"/>
             </VBox>
             <TabPane >
                 <tabs>

@@ -27,19 +27,33 @@ public class Vector2
         this.y = y;
     }
 
-    public  Vector2 add(Vector2 other)
+    public Vector2 add(Vector2 other)
     {
         return new Vector2(x + other.getX(), y + other.getY());
     }
 
-    public  Vector2 multiply(float other)
+    public Vector2 subtract(Vector2 other)
+    {
+        return new Vector2(x - other.getX(), y - other.getY());
+    }
+
+    public Vector2 multiply(float other)
     {
         return new Vector2(x * other, y * other);
+    }
+
+    public Vector2 divide(float other)
+    {
+        return new Vector2(x / other, y / other);
+    }
+
+    public Vector2 absolute()
+    {
+        return new Vector2(Math.abs(x), Math.abs(y));
     }
 
     public static Vector2 zero()
     {
         return new Vector2(0,0);
     }
-    public static Vector2 x() { return new Vector2(1,0); }
 }
