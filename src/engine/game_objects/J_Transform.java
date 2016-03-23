@@ -23,9 +23,17 @@ public class J_Transform extends J_Component {
         position = positionCenter.add(size.multiply(-0.5f));
     }
 
+    protected Vector2 GetCorner()
+    {
+        return position;
+    }
     public Vector2 GetPosition()
     {
         return positionCenter;
+    }
+    public Vector2 GetSize()
+    {
+        return size;
     }
 
     public Vector2 GetLocalPosition()

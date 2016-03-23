@@ -1,6 +1,9 @@
 package engine;
 
 import editor.J_Level;
+import engine.game_objects.J_OvalRenderer;
+import engine.game_objects.J_ShapeRenderer;
+import engine.game_objects.J_Transform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -8,6 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import juggernaut_engine.J_Log;
 import juggernaut_engine.framework.GameObject;
+import juggernaut_engine.framework.Vector2;
 
 public class J_Renderer{
 
