@@ -8,4 +8,9 @@ public abstract class J_Component
     public abstract void Update(float dt);
 
     public abstract void DisplayProperties();
+
+    public void AddToGameObject(J_GameObject obj)
+    {
+        obj.AddComponent(this);
+    }
 }
