@@ -1,26 +1,17 @@
 package editor;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import engine.J_Level;
 import javafx.scene.control.*;
-import juggernaut_engine.framework.Vector2;
-import juggernaut_engine.framework.basic_shapes.Oval;
-import juggernaut_engine.framework.basic_shapes.Rectangle;
+import engine.game_objects.Vector2;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.control.ComboBox;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,7 +39,7 @@ public class JE_Controller
     private JE_Renderer renderer = JE_Renderer.GetInstance();
     private J_Level level = new J_Level();
 
-    Oval test = new Oval(new Vector2(50, 50), new Vector2(50, 50), Color.RED);
+    //Oval test = new Oval(new Vector2(50, 50), new Vector2(50, 50), Color.RED);
 
 
 
@@ -62,7 +53,7 @@ public class JE_Controller
 
         renderer.SetCanvas(levelEditorCanvas);
         renderer.SetLevel(level);
-        level.AddObject(test);
+        //level.AddObject(test);
      }
 
 
@@ -105,7 +96,7 @@ public class JE_Controller
         colors.put("blue", Color.BLUE);
         colors.put("green", Color.GREEN);
 
-        Rectangle newObj = new Rectangle(new Vector2(_x, _y), new Vector2(_w, _h), colors.get(_c.toLowerCase()));
+        //Rectangle newObj = new Rectangle(new Vector2(_x, _y), new Vector2(_w, _h), colors.get(_c.toLowerCase()));
         x.clear();
         x.setText("0");
         y.clear();
@@ -115,6 +106,6 @@ public class JE_Controller
         h.clear();
         h.setText("0");
 
-        level.AddObject(newObj);
+        //level.AddObject(newObj);
     }
 }

@@ -1,13 +1,13 @@
 package editor;
 
-import juggernaut_engine.framework.GameObject;
+import engine.J_Level;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import juggernaut_engine.J_Log;
+import engine.J_Log;
 
 
 public class JE_Renderer
@@ -54,10 +54,10 @@ public class JE_Renderer
         gc.setFill(Color.rgb(60, 60, 190));
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        for(GameObject obj : level.GetObjects())
+        /*for(GameObject obj : level.GetObjects())
         {
             obj.draw(gc);
-        }
+        }*/
     }
     public void Stop()
     {

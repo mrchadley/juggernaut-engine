@@ -1,12 +1,10 @@
 package engine;
 
-import editor.J_Level;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import juggernaut_engine.J_Log;
 
 
 //code that links together the framework of the engine such as the renderer, the input handler, and anything else that may be added

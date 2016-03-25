@@ -1,7 +1,6 @@
 package engine;
 
 import javafx.stage.Stage;
-import juggernaut_engine.J_Log;
 
 
 public class TestGame extends J_Game

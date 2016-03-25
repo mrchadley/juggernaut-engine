@@ -1,8 +1,6 @@
 package engine.game_objects;
 
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import juggernaut_engine.framework.Vector2;
 
 public class J_SpriteAnimation
 {

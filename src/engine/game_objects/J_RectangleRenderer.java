@@ -12,10 +12,9 @@ public class J_RectangleRenderer extends J_ShapeRenderer
     @Override
     public void Draw(GraphicsContext gc)
     {
-        if(fill != null)
-            gc.fillRect(transform.GetCorner().getX(), transform.GetPosition().getY(), transform.GetSize().getX(), transform.GetSize().getY());
-        if(stroke != null)
-            gc.strokeRect(transform.GetCorner().getX(), transform.GetPosition().getY(), transform.GetSize().getX(), transform.GetSize().getY());
+        super.Draw(gc);
+        gc.fillRect(transform.GetCorner().getX(), transform.GetCorner().getY(), transform.GetSize().getX(), transform.GetSize().getY());
+        gc.strokeRect(transform.GetCorner().getX(), transform.GetCorner().getY(), transform.GetSize().getX(), transform.GetSize().getY());
     }
 
     @Override

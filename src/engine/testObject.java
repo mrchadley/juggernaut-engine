@@ -1,7 +1,5 @@
 package engine;
 
-import juggernaut_engine.J_Log;
-
 /**
  * Created by marct on 2016-03-20.
  */

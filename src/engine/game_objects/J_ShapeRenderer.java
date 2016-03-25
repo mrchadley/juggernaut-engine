@@ -15,4 +15,11 @@ public abstract class J_ShapeRenderer extends J_RendererComponent
         this.stroke = stroke;
         this.fill = fill;
     }
+
+    @Override
+    public void Draw(GraphicsContext gc)
+    {
+        gc.setFill(fill);
+        gc.setStroke(stroke);
+    }
 }

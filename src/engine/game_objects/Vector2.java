@@ -1,4 +1,4 @@
-package juggernaut_engine.framework;
+package engine.game_objects;
 
 public class Vector2
 {
@@ -55,5 +55,10 @@ public class Vector2
     public static Vector2 zero()
     {
         return new Vector2(0,0);
+    }
+
+    public static Vector2 one()
+    {
+        return new Vector2(1, 1);
     }
 }

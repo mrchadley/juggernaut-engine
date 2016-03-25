@@ -1,8 +1,10 @@
 package engine.game_objects;
 
+import javafx.scene.canvas.GraphicsContext;
+
 import java.util.LinkedList;
 
-public class J_SpriteAnimator extends J_Component
+public class J_SpriteAnimator extends J_RendererComponent
 {
     private LinkedList<J_SpriteAnimation> animations = new LinkedList<>();
     private J_SpriteAnimation currentAnim;
@@ -10,6 +12,10 @@ public class J_SpriteAnimator extends J_Component
     private float xPosition = 0;
     private float frameTimeCounter = 0.0f;
 
+    public J_SpriteAnimator(J_Transform transform)
+    {
+       super(transform);
+    }
 
     @Override
     public void Update(float dt)
@@ -27,6 +33,13 @@ public class J_SpriteAnimator extends J_Component
             }
         }
         xPosition = currentAnim.GetOffset();
+    }
+
+    @Override
+    public void Draw(GraphicsContext gc)
+    {
+        gc.drawImage(currentAnim.GetSpriteSheet(), xPosition, 0, currentAnim.GetFrameSize().getX(), currentAnim.GetFrameSize().getY(),
+                transform.GetCorner().getX(), transform.GetCorner().getY(), transform.GetSize().getX(), transform.GetSize().getY());
     }
 
     public J_SpriteAnimation GetCurrentAnimation()
@@ -49,6 +62,7 @@ public class J_SpriteAnimator extends J_Component
         if(index < animations.size())
         {
             currentAnim = animations.get(index);
+
             currentAnim.Play();
         }
     }

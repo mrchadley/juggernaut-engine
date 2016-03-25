@@ -1,7 +1,6 @@
 package engine.game_objects;
 
-import juggernaut_engine.J_Log;
-import juggernaut_engine.framework.Vector2;
+import engine.J_Log;
 
 import java.util.LinkedList;
 
@@ -16,6 +15,7 @@ public class J_Transform extends J_Component {
 
     public J_Transform(Vector2 pos, Vector2 size)
     {
+        J_Log.debug("j_transform", "initializing");
         localPosition = pos;
         positionCenter = pos;
         this.size = size;

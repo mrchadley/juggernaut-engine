@@ -1,4 +1,4 @@
-package juggernaut_engine;
+package engine;
 
 import java.io.PrintStream;
 

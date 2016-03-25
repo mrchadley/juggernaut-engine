@@ -2,8 +2,7 @@ package engine;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.*;
-import juggernaut_engine.J_Log;
-import juggernaut_engine.framework.Vector2;
+import engine.game_objects.Vector2;
 
 /*
 clean up the code in here
@@ -32,7 +31,7 @@ public class J_InputHandler implements EventHandler<InputEvent>
     @Override
     public void handle(InputEvent event)
     {
-        J_Log.debug("j_inputHandler", event.getEventType().getName());
+        //J_Log.debug("j_inputHandler", event.getEventType().getName());
 
         if(event.getEventType() == KeyEvent.KEY_PRESSED)//key being held
         {
