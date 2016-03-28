@@ -1,9 +1,20 @@
-package engine.game_objects;
+package engine.framework;
 
-public class Vector2
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
+public class Vector2 implements Externalizable
 {
     private float x;
     private float y;
+
+    public Vector2()
+    {
+        x = 0;
+        y = 0;
+    }
 
     public Vector2(float x, float y)
     {
@@ -60,5 +71,25 @@ public class Vector2
     public static Vector2 one()
     {
         return new Vector2(1, 1);
+    }
+
+    @Override
+    public String toString()
+    {
+        return "[Vector2: x=" + x + " y=" + y + "]";
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException
+    {
+        out.writeFloat(x);
+        out.writeFloat(y);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
+    {
+        this.x = in.readFloat();
+        this.y = in.readFloat();
     }
 }

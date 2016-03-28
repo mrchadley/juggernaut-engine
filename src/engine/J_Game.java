@@ -1,12 +1,14 @@
 package engine;
 
 import engine.game_objects.*;
+import engine.game_objects.render_components.*;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import engine.game_objects.Vector2;
+import engine.framework.Vector2;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 public abstract class J_Game extends Application
@@ -21,16 +23,38 @@ public abstract class J_Game extends Application
     @Override
     public void start(Stage primaryStage)
     {
+
         //load config
-        J_Level testLevel = Load("testLevel/Objects");
+        J_Level testLevel = Load();
+
+        try
+        {
+            testLevel.SaveLevel("test");
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        J_Level loadTestLevel = new J_Level();
+
+        try {
+            loadTestLevel.LoadLevel("test");
+        }catch(IOException ioe)
+        {
+            ioe.printStackTrace();
+        }catch(ClassNotFoundException cnfe)
+        {
+            cnfe.printStackTrace();
+        }
 
         //Initialize, SetLevel, Run,J_Engine
         engine.Initialize(name, width, height, fps, primaryStage);
-        engine.SetLevel(testLevel);
+        engine.SetLevel(loadTestLevel);
         engine.Run();
     }
 
-    public J_Level Load(String config)
+    public J_Level Load()
     {
         //fileIO stuff for loading the name, width, height, fps, and level files
         //fileIO stuff for loading each level
@@ -63,6 +87,8 @@ public abstract class J_Game extends Application
         level.AddObject(rect);
         level.AddObject(sprite);
         level.AddObject(animatedSprite);
+
+
 
         return level;
     }

@@ -2,7 +2,6 @@ package editor;
 
 import engine.J_Level;
 import javafx.scene.control.*;
-import engine.game_objects.Vector2;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

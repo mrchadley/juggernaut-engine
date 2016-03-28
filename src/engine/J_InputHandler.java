@@ -2,7 +2,7 @@ package engine;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.*;
-import engine.game_objects.Vector2;
+import engine.framework.Vector2;
 
 /*
 clean up the code in here

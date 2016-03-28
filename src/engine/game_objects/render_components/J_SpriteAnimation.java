@@ -1,8 +1,14 @@
-package engine.game_objects;
+package engine.game_objects.render_components;
 
+import engine.framework.Vector2;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
-public class J_SpriteAnimation
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
+import java.io.*;
+
+public class J_SpriteAnimation implements Externalizable
 {
     private Image spriteSheet;
     private Vector2 frameSize; //size of each frame
@@ -14,6 +20,11 @@ public class J_SpriteAnimation
 
     private boolean playing = false;
     private boolean loopable = false;
+
+    public J_SpriteAnimation()
+    {
+
+    }
 
     public J_SpriteAnimation(Image spriteSheet, Vector2 frameSize, int frameCount, float frameLength)
     {
@@ -105,4 +116,32 @@ public class J_SpriteAnimation
     {
         return (frameSize.getX() + frameOffset) * frame;
     }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException
+    {
+        out.writeInt(frameCount);
+        out.writeFloat(frameOffset);
+        out.writeInt(frame);
+        out.writeFloat(frameLength);
+        out.writeBoolean(playing);
+        out.writeBoolean(loopable);
+        out.writeObject(frameSize);
+        ImageIO.write(SwingFXUtils.fromFXImage(spriteSheet, null), "png", ImageIO.createImageOutputStream(out));
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
+    {
+
+        this.frameCount = in.readInt();
+        this.frameOffset = in.readFloat();
+        this.frame = in.readInt();;
+        this.frameLength = in.readFloat();
+        this.playing = in.readBoolean();
+        this.loopable = in.readBoolean();
+        this.frameSize = (Vector2)in.readObject();
+        this.spriteSheet = SwingFXUtils.toFXImage(ImageIO.read(ImageIO.createImageInputStream(in)), null);
+    }
 }
+

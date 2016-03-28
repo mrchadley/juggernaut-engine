@@ -1,4 +1,4 @@
-package engine.game_objects;
+package engine.framework;
 
 public interface J_Updatable
 {

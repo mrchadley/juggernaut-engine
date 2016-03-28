@@ -1,7 +1,11 @@
-package engine.game_objects;
+package engine.game_objects.render_components;
 
+import engine.game_objects.J_Transform;
 import javafx.scene.canvas.GraphicsContext;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.LinkedList;
 
 public class J_SpriteAnimator extends J_RendererComponent
@@ -11,6 +15,11 @@ public class J_SpriteAnimator extends J_RendererComponent
 
     private float xPosition = 0;
     private float frameTimeCounter = 0.0f;
+
+    public J_SpriteAnimator()
+    {
+
+    }
 
     public J_SpriteAnimator(J_Transform transform)
     {
@@ -71,5 +80,23 @@ public class J_SpriteAnimator extends J_RendererComponent
     public void DisplayProperties()
     {
 
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException
+    {
+        out.writeObject(animations);
+        out.writeObject(currentAnim);
+        out.writeFloat(xPosition);
+        out.writeFloat(frameTimeCounter);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
+    {
+        this.animations = (LinkedList<J_SpriteAnimation>)in.readObject();
+        this.currentAnim = (J_SpriteAnimation)in.readObject();
+        this.xPosition = in.readFloat();
+        this.frameTimeCounter = in.readFloat();
     }
 }

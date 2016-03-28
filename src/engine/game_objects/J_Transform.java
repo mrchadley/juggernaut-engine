@@ -1,7 +1,11 @@
 package engine.game_objects;
 
 import engine.J_Log;
+import engine.framework.Vector2;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.LinkedList;
 
 public class J_Transform extends J_Component {
@@ -13,6 +17,11 @@ public class J_Transform extends J_Component {
     private J_Transform parent = null;
     private LinkedList<J_Transform> children = new LinkedList<>();
 
+    public J_Transform()
+    {
+
+    }
+
     public J_Transform(Vector2 pos, Vector2 size)
     {
         J_Log.debug("j_transform", "initializing");
@@ -23,7 +32,7 @@ public class J_Transform extends J_Component {
         position = positionCenter.add(size.multiply(-0.5f));
     }
 
-    protected Vector2 GetCorner()
+    public Vector2 GetCorner()
     {
         return position;
     }
@@ -105,5 +114,50 @@ public class J_Transform extends J_Component {
     public void DisplayProperties()
     {
 
+    }
+
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException
+    {
+        out.writeObject(position);
+        out.writeObject(localPosition);
+        out.writeObject(positionCenter);
+        out.writeObject(size);
+
+        out.writeObject(parent);
+        out.writeObject(children);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
+    {
+        this.position = (Vector2)in.readObject();
+        this.localPosition = (Vector2)in.readObject();
+        this.positionCenter = (Vector2)in.readObject();
+        this.size = (Vector2)in.readObject();
+
+        this.parent = (J_Transform)in.readObject();
+        this.children = (LinkedList<J_Transform>)in.readObject();
+    }
+
+    @Override
+    public String toString()
+    {
+        String output =  "[Transform: position=" + position.toString() + " localPosition=" + localPosition.toString()
+                + " positionCenter=" + positionCenter.toString() + " size=" + size.toString() + " parent=";
+
+        if(parent == null)
+            output += "none";
+        else
+            output += (parent.toString());
+
+        output += (" children=");
+        if(children.isEmpty())
+            output += ("none");
+        else
+            for(J_Transform child : children)
+                output += (" \n~" + child.toString());
+        return output + "]";
     }
 }

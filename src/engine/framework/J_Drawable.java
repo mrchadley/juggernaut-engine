@@ -1,4 +1,4 @@
-package engine.game_objects;
+package engine.framework;
 
 import javafx.scene.canvas.GraphicsContext;
 
