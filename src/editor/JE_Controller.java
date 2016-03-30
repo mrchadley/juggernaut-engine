@@ -31,7 +31,6 @@ public class JE_Controller
     @FXML private TreeView<File> locationTreeView;
     @FXML private ComboBox<String> colorCombo;
 
-
     private Color selectedColor;
     Map<String, Color> colors = new HashMap<String, Color>();
     private boolean running = false;
@@ -46,6 +45,21 @@ public class JE_Controller
     {
         levelEditorCanvas.widthProperty().bind(border.widthProperty());
         levelEditorCanvas.heightProperty().bind(border.heightProperty());
+
+        try
+        {
+            level.LoadLevel("test");
+        }
+        catch(IOException ioe)
+        {
+            ioe.printStackTrace();
+        }
+        catch(ClassNotFoundException cnfe)
+        {
+            cnfe.printStackTrace();
+        }
+
+
 
         File currentDir = new File("src/"); // current directory
         loadTreeItems(currentDir);
@@ -79,8 +93,9 @@ public class JE_Controller
     }
 
 
-    public void test(ActionEvent actionEvent) {
-
+    public void test(ActionEvent actionEvent)
+    {
+        renderer.SetRunning(!renderer.isRunning());
     }
 
     public void addObject(ActionEvent actionEvent)

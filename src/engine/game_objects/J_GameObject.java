@@ -20,7 +20,9 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
     private LinkedList<J_Component> components = new LinkedList<>();
 
     public J_GameObject()
-    {}
+    {
+
+    }
 
     public J_GameObject(String name, J_Transform transform)
     {
@@ -119,6 +121,7 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
         components = (LinkedList<J_Component>) in.readObject();
 
         renderer.SetTransform(transform);
+        System.out.println(renderer.toString());
         System.out.println(transform.toString());
     }
 }

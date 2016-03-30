@@ -71,7 +71,7 @@
                     </Tab>
                     <Tab text="Outliner" fx:id="OutlinerTab">
                         <content>
-
+                            <TreeView fx:id="levelOutliner"/>
                         </content>
                     </Tab>
                 </tabs>

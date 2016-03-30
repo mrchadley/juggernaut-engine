@@ -1,6 +1,7 @@
 package editor;
 
 import engine.J_Level;
+import engine.game_objects.J_GameObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
@@ -21,12 +22,15 @@ public class JE_Renderer
 
     private static JE_Renderer instance = new JE_Renderer();
 
+    private boolean running = false;
+
     private JE_Renderer()
     {
         J_Log.debug("sceneview", "initializing");
         editorLoop.setCycleCount(Timeline.INDEFINITE);
-        tick = new KeyFrame(Duration.millis(180), event ->
+        tick = new KeyFrame(Duration.millis(34), event ->
         {
+            Update();
             Draw();
             J_Log.debug("sceneview", "looping");
         });
@@ -54,11 +58,28 @@ public class JE_Renderer
         gc.setFill(Color.rgb(60, 60, 190));
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        /*for(GameObject obj : level.GetObjects())
+        for(J_GameObject obj : level.GetObjects())
         {
-            obj.draw(gc);
-        }*/
+            obj.Draw(gc);
+        }
     }
+    public void Update()
+    {
+        if(running)
+        {
+            level.Update((float)1/30);
+        }
+    }
+
+    public void SetRunning(boolean bool)
+    {
+        running = bool;
+    }
+    public boolean isRunning()
+    {
+        return running;
+    }
+
     public void Stop()
     {
         editorLoop.stop();

@@ -25,17 +25,17 @@ public abstract class J_Game extends Application
     {
 
         //load config
-       // J_Level testLevel = Load();
+        J_Level testLevel = Load();
 
 
-       /* try
+        try
         {
             testLevel.SaveLevel("test");
         }
         catch (IOException e)
         {
             e.printStackTrace();
-        }*/
+        }
 
         J_Level loadTestLevel = new J_Level();
 
