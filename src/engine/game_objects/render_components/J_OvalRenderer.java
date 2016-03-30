@@ -12,7 +12,7 @@ public class J_OvalRenderer extends J_ShapeRenderer
 {
     public J_OvalRenderer()
     {
-
+        super();
     }
     public J_OvalRenderer(J_Transform transform, Color stroke, Color fill)
     {

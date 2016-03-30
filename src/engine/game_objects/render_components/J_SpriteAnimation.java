@@ -23,7 +23,10 @@ public class J_SpriteAnimation implements Externalizable
 
     public J_SpriteAnimation()
     {
-
+        frameSize = new Vector2();
+        frameCount = 1;
+        frame = 0;
+        frameLength = 0.0f;
     }
 
     public J_SpriteAnimation(Image spriteSheet, Vector2 frameSize, int frameCount, float frameLength)

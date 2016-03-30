@@ -19,7 +19,10 @@ public class J_Transform extends J_Component {
 
     public J_Transform()
     {
-
+        position = new Vector2();
+        localPosition = new Vector2();
+        positionCenter = new Vector2();
+        size = new Vector2();
     }
 
     public J_Transform(Vector2 pos, Vector2 size)

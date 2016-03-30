@@ -25,16 +25,17 @@ public abstract class J_Game extends Application
     {
 
         //load config
-        J_Level testLevel = Load();
+       // J_Level testLevel = Load();
 
-        try
+
+       /* try
         {
             testLevel.SaveLevel("test");
         }
         catch (IOException e)
         {
             e.printStackTrace();
-        }
+        }*/
 
         J_Level loadTestLevel = new J_Level();
 
@@ -63,13 +64,13 @@ public abstract class J_Game extends Application
         J_Level level = new J_Level();
 
         J_GameObject oval = new J_GameObject("Oval", new J_Transform(new Vector2(50, 50), new Vector2(50, 50)));
-        oval.AddComponent(new J_OvalRenderer(oval.GetTransform(), Color.BLACK, Color.RED));
+        oval.SetRenderer(new J_OvalRenderer(oval.GetTransform(), Color.BLACK, Color.RED));
 
         J_GameObject rect = new J_GameObject("Rect", new J_Transform(new Vector2(250, 50), new Vector2(150, 50)));
-        rect.AddComponent(new J_RectangleRenderer(rect.GetTransform(), Color.GREEN, Color.ORANGE));
+        rect.SetRenderer(new J_RectangleRenderer(rect.GetTransform(), Color.GREEN, Color.ORANGE));
 
         J_GameObject sprite = new J_GameObject("Sprite", new J_Transform(new Vector2(250, 500), new Vector2(320, 200)));
-        sprite.AddComponent(new J_SpriteRenderer(sprite.GetTransform(), new Image("/engine/images/PhandroidRobotPlain.PNG")));
+        sprite.SetRenderer(new J_SpriteRenderer(sprite.GetTransform(), new Image("/engine/images/PhandroidRobotPlain.PNG")));
 
         J_GameObject animatedSprite = new J_GameObject("animatedSprite", new J_Transform(new Vector2(500, 300), new Vector2(180, 250)));
 
@@ -81,7 +82,7 @@ public abstract class J_Game extends Application
         animator.AddAnimation(testAnim);
         animator.PlayAnimation(0);
 
-        animatedSprite.AddComponent(animator);
+        animatedSprite.SetRenderer(animator);
 
         level.AddObject(oval);
         level.AddObject(rect);

@@ -6,15 +6,21 @@ import engine.game_objects.J_Transform;
 
 public abstract class J_RendererComponent extends J_Component implements J_Drawable
 {
+
+    protected J_Transform transform;
+
     public J_RendererComponent()
     {
 
     }
 
-    protected J_Transform transform;
-
     public J_RendererComponent(J_Transform transform)
     {
         this.transform = transform;
+    }
+
+    public void SetTransform(J_Transform newTransform)
+    {
+        transform = newTransform;
     }
 }

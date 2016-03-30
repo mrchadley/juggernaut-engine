@@ -1,5 +1,6 @@
 package engine.game_objects;
 
+import engine.J_Log;
 import engine.framework.J_Drawable;
 import engine.framework.J_Updatable;
 import engine.framework.Vector2;
@@ -13,6 +14,9 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
 {
     private String name = "GameObject";
     private J_Transform transform = new J_Transform(Vector2.zero(), Vector2.one());
+
+
+    private J_RendererComponent renderer;
     private LinkedList<J_Component> components = new LinkedList<>();
 
     public J_GameObject()
@@ -31,6 +35,7 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
     public void Update(float dt)
     {
         transform.Update(dt);
+        renderer.Update(dt);
 
         for(J_Component comp : components)
         {
@@ -40,7 +45,8 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
     @Override
     public void Draw(GraphicsContext gc)
     {
-
+        renderer.Draw(gc);
+        /*
         for(J_Component comp : components)
         {
             if(J_RendererComponent.class.isAssignableFrom(comp.getClass()))
@@ -48,7 +54,7 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
                 J_RendererComponent temp = (J_RendererComponent)comp;
                 temp.Draw(gc);
             }
-        }
+        }*/
     }
 
     @Override
@@ -68,6 +74,11 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
             return components.get(index);
         }
         return null;
+    }
+
+
+    public void SetRenderer(J_RendererComponent renderer) {
+        this.renderer = renderer;
     }
 
     public LinkedList<J_Component> GetComponents()
@@ -95,6 +106,7 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
     {
         out.writeUTF(name);
         out.writeObject(transform);
+        out.writeObject(renderer);
         out.writeObject(components);
     }
 
@@ -103,6 +115,10 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
     {
         name = in.readUTF();
         transform = (J_Transform)in.readObject();
+        renderer = (J_RendererComponent) in.readObject();
         components = (LinkedList<J_Component>) in.readObject();
+
+        renderer.SetTransform(transform);
+        System.out.println(transform.toString());
     }
 }
