@@ -25,6 +25,7 @@ public abstract class J_Game extends Application
     public void start(Stage primaryStage)
     {
 
+
         //load config
         J_Level testLevel = Load();
 

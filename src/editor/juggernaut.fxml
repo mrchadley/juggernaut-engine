@@ -50,7 +50,7 @@
                 </top>
                 <center>
                         <BorderPane fx:id="border">
-                            <Canvas BorderPane.alignment="CENTER" fx:id="levelEditorCanvas"/>
+                            <Canvas BorderPane.alignment="TOP_LEFT" fx:id="levelEditorCanvas"/>
                         </BorderPane>
                 </center>
                 <right>

@@ -54,9 +54,8 @@ public class JE_Controller
     public void initialize()
     {
         stage.setTitle(defaultTitle);
-        levelEditorCanvas.setWidth(800);
-        levelEditorCanvas.setHeight(600);
 
+        setCanvasScale();
 
         levelOutliner.setShowRoot(false);
         TreeItem<String> root = new TreeItem<>();
@@ -73,6 +72,18 @@ public class JE_Controller
         renderer.SetCanvas(levelEditorCanvas);
         renderer.SetLevel(currentLevel);
      }
+
+    public void setCanvasScale()
+    {
+        levelEditorCanvas.setWidth(1280);
+        levelEditorCanvas.setHeight(720);
+
+        levelEditorCanvas.scaleXProperty().bind(border.widthProperty().subtract(20 * 2).divide(levelEditorCanvas.widthProperty()));
+        levelEditorCanvas.scaleYProperty().bind(levelEditorCanvas.scaleXProperty());
+
+        levelEditorCanvas.translateXProperty().bind(levelEditorCanvas.widthProperty().multiply(levelEditorCanvas.scaleXProperty().subtract(1).divide(2)).add(20));
+        levelEditorCanvas.translateYProperty().bind(levelEditorCanvas.heightProperty().multiply(levelEditorCanvas.scaleYProperty().subtract(1).divide(2)).add(20));
+    }
 
     public void loadTreeItems(File dir) {
         TreeItem<File> root = new TreeItem<>(new File("Files:"));

@@ -1,0 +1,22 @@
+.menu-item,
+.menu-item .label,
+.context-menu,
+.menu,
+.menu .label,
+.menu-bar
+{
+    -fx-background-color: #393939;
+    -fx-text-fill: deepskyblue;
+}
+
+.menu:showing,
+.menu:showing .label,
+.menu:hover,
+.menu:hover .label,
+
+.menu-item:focused,
+.menu-item:focused .label
+{
+    -fx-background-color: deepskyblue;
+    -fx-text-fill: #393939;
+}

@@ -57,6 +57,7 @@ public class J_Engine
         gameloop.getKeyFrames().add(tick);
 
         primaryStage.setScene(renderer.GetScene());
+        //primaryStage.setResizable(false);
         primaryStage.show();
     }
 
