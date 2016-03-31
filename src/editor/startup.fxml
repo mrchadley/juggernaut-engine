@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+
+<?import javafx.stage.Stage?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<Stage fx:id="initial" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.JE_startup">
+    <scene>
+        <Scene width="480" height="640">
+            <GridPane fx:id="layout">
+                <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+                <Text id="title" text="Juggernaut Engine"/>
+                <stylesheets>
+                    <URL value="@startup-style.css" />
+                </stylesheets>
+            </GridPane>
+        </Scene>
+    </scene>
+</Stage>

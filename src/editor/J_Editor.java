@@ -2,16 +2,15 @@ package editor;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -24,14 +23,11 @@ public class J_Editor extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Tree View Sample");
+        primaryStage.setTitle("Juggernaut Editor");
 
-        primaryStage = FXMLLoader.load(getClass().getResource("juggernaut.fxml"));
 
-        JE_Renderer.GetInstance().Run();
-
-        //primaryStage.setTitle("");
-        //primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage = FXMLLoader.load(getClass().getResource("startup.fxml"));
+        //JE_Renderer.GetInstance().Run();
         primaryStage.show();
     }
 
