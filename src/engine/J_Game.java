@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import engine.framework.Vector2;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -30,7 +31,7 @@ public abstract class J_Game extends Application
 
         try
         {
-            testLevel.SaveLevel("test");
+            testLevel.SaveLevel(new File("test.jLevel"));
         }
         catch (IOException e)
         {
@@ -40,7 +41,7 @@ public abstract class J_Game extends Application
         J_Level loadTestLevel = new J_Level();
 
         try {
-            loadTestLevel.LoadLevel("test");
+            loadTestLevel.LoadLevel(new File("test.jLevel"));
         }catch(IOException ioe)
         {
             ioe.printStackTrace();

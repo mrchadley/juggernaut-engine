@@ -1,74 +1,78 @@
 package editor;
 
 import engine.J_Level;
+import engine.game_objects.J_GameObject;
 import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.control.ComboBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 
 public class JE_Controller
 {
-    @FXML private Canvas levelEditorCanvas;
-    @FXML private Canvas layer;
+    @FXML private Stage stage;
     @FXML private BorderPane layout;
+    @FXML private Canvas levelEditorCanvas;
     @FXML private TextField x;
     @FXML private TextField y;
     @FXML private TextField w;
     @FXML private TextField h;
-    @FXML private Button add;
     @FXML private BorderPane border;
     @FXML private Tab ProjectTab;
     @FXML private Tab OutlinerTab;
     @FXML private TreeView<File> locationTreeView;
     @FXML private ComboBox<String> colorCombo;
 
-    private Color selectedColor;
+    @FXML private HBox propertiesPane;
+    @FXML private TreeView<String> levelOutliner;
+
+    private final String defaultTitle = "Juggernaut Engine [Editor]";
+
     Map<String, Color> colors = new HashMap<String, Color>();
-    private boolean running = false;
     private JE_Renderer renderer = JE_Renderer.GetInstance();
-    private J_Level level = new J_Level();
+    private J_Level currentLevel = new J_Level();
 
-    //Oval test = new Oval(new Vector2(50, 50), new Vector2(50, 50), Color.RED);
+    private ButtonType yes = new ButtonType("Yes");
+    private ButtonType no = new ButtonType("No");
 
-
+    private File projectDirectory = new File(".");
+    private File currentLevelFile = null;
 
     public void initialize()
     {
-        levelEditorCanvas.widthProperty().bind(border.widthProperty());
-        levelEditorCanvas.heightProperty().bind(border.heightProperty());
-
-        try
-        {
-            level.LoadLevel("test");
-        }
-        catch(IOException ioe)
-        {
-            ioe.printStackTrace();
-        }
-        catch(ClassNotFoundException cnfe)
-        {
-            cnfe.printStackTrace();
-        }
+        stage.setTitle(defaultTitle);
+        levelEditorCanvas.setWidth(800);
+        levelEditorCanvas.setHeight(600);
 
 
+        levelOutliner.setShowRoot(false);
+        TreeItem<String> root = new TreeItem<>();
+        for(J_GameObject obj : currentLevel.GetObjects())
+        {
+            TreeItem<String> item = new TreeItem<>(obj.GetName());
+            root.getChildren().add(item);
+        }
+        levelOutliner.setRoot(root);
 
         File currentDir = new File("src/"); // current directory
         loadTreeItems(currentDir);
 
         renderer.SetCanvas(levelEditorCanvas);
-        renderer.SetLevel(level);
-        //level.AddObject(test);
+        renderer.SetLevel(currentLevel);
      }
-
 
     public void loadTreeItems(File dir) {
         TreeItem<File> root = new TreeItem<>(new File("Files:"));
@@ -91,7 +95,6 @@ public class JE_Controller
             e.printStackTrace();
         }
     }
-
 
     public void test(ActionEvent actionEvent)
     {
@@ -120,6 +123,115 @@ public class JE_Controller
         h.clear();
         h.setText("0");
 
-        //level.AddObject(newObj);
+        //currentLevel.AddObject(newObj);
+    }
+
+    public void NewLevel(ActionEvent actionEvent)
+    {
+        Alert newLevelAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        newLevelAlert.setTitle("Create New Level?");
+        newLevelAlert.setHeaderText("Any unsaved changes will be overwritten.");
+        newLevelAlert.setGraphic(null);
+        newLevelAlert.setContentText("Do you wish to continue?");
+
+        newLevelAlert.getButtonTypes().setAll(yes, no);
+
+        Optional<ButtonType> result = newLevelAlert.showAndWait();
+        if(result.get() == yes)
+        {
+            currentLevel = new J_Level();
+            renderer.SetLevel(currentLevel);
+            levelOutliner.getRoot().getChildren().clear();
+            currentLevelFile = null;
+        }
+    }
+    public void OpenLevel(ActionEvent actionEvent)
+    {
+        Alert openLevelAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        openLevelAlert.setTitle("Open Level?");
+        openLevelAlert.setHeaderText("Any unsaved changes will be overwritten.");
+        openLevelAlert.setGraphic(null);
+        openLevelAlert.setContentText("Do you wish to continue?");
+
+        openLevelAlert.getButtonTypes().setAll(yes, no);
+
+        Optional<ButtonType> result = openLevelAlert.showAndWait();
+        if(result.get() == yes)
+        {
+            FileChooser openLevel = new FileChooser();
+            openLevel.setTitle("Open Level");
+            openLevel.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("Juggernaut Level Files", "*.jLevel"));
+            openLevel.setInitialDirectory(projectDirectory);
+            File openedLevel = openLevel.showOpenDialog(null);
+            if(openedLevel != null)
+            {
+                try {
+                    currentLevelFile = openedLevel;
+                    currentLevel.LoadLevel(openedLevel);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    public void SaveLevel(ActionEvent actionEvent)
+    {
+        if(currentLevelFile != null)
+        {
+            try {
+                currentLevel.SaveLevel(currentLevelFile);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        else SaveLevelAs(actionEvent);
+    }
+    public void SaveLevelAs(ActionEvent actionEvent)
+    {
+        FileChooser saveLevel = new FileChooser();
+        saveLevel.setTitle("Save Level");
+        saveLevel.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("Juggernaut Level Files", "*.jLevel"));
+        saveLevel.setInitialDirectory(projectDirectory);
+        File savedLevel = saveLevel.showSaveDialog(null);
+        if(savedLevel != null)
+        {
+            try {
+                currentLevelFile = savedLevel;
+                currentLevel.SaveLevel(savedLevel);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public void NewProject(ActionEvent actionEvent)
+    {
+        Alert newLevelAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        newLevelAlert.setTitle("Create New Project?");
+        newLevelAlert.setHeaderText("Any unsaved changes will be overwritten.");
+        newLevelAlert.setGraphic(null);
+        newLevelAlert.setContentText("Do you wish to continue?");
+
+        newLevelAlert.getButtonTypes().setAll(yes, no);
+
+        Optional<ButtonType> result = newLevelAlert.showAndWait();
+        if(result.get() == yes)
+        {
+            TextInputDialog newProjectDialog = new TextInputDialog();
+            newProjectDialog.setTitle("New Project - Juggernaut Engine");
+            newProjectDialog.setHeaderText("");
+            newProjectDialog.setContentText("Project Name:");
+
+            Optional<String> name = newProjectDialog.showAndWait();
+            if(name.get() != null)
+            {
+                stage.setTitle(name.get() + " - " + defaultTitle);
+            }
+        }
+    }
+    public void OpenProject(ActionEvent actionEvent)
+    {
+
     }
 }

@@ -19,6 +19,9 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
     private J_RendererComponent renderer;
     private LinkedList<J_Component> components = new LinkedList<>();
 
+    private J_GameObject parent;
+    private LinkedList<J_GameObject> children = new LinkedList<>();
+
     public J_GameObject()
     {
 
@@ -123,5 +126,50 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
         renderer.SetTransform(transform);
         System.out.println(renderer.toString());
         System.out.println(transform.toString());
+    }
+
+    public String GetName() {
+        return name;
+    }
+
+    public void SetName(String name) {
+        this.name = name;
+    }
+
+
+    public void SetParent(J_GameObject parent)
+    {
+        parent.AddChild(this);
+        transform.SetParent(parent.GetTransform());
+    }
+    public void AddChild(J_GameObject child)
+    {
+        child.parent = this;
+        children.add(child);
+        transform.AddChild(child.GetTransform());
+
+    }
+    public void RemoveParent()
+    {
+        parent = null;
+        transform.RemoveParent();
+
+    }
+    public void RemoveChild(J_GameObject child)
+    {
+        if(children.contains(child))
+        {
+            child.RemoveParent();
+            children.remove(child);
+        }
+        transform.RemoveChild(child.GetTransform());
+    }
+
+    public LinkedList<J_GameObject> GetChildren() {
+        return children;
+    }
+
+    public J_GameObject GetParent() {
+        return parent;
     }
 }

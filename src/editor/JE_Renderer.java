@@ -26,13 +26,13 @@ public class JE_Renderer
 
     private JE_Renderer()
     {
-        J_Log.debug("sceneview", "initializing");
+        //J_Log.debug("sceneview", "initializing");
         editorLoop.setCycleCount(Timeline.INDEFINITE);
         tick = new KeyFrame(Duration.millis(34), event ->
         {
             Update();
             Draw();
-            J_Log.debug("sceneview", "looping");
+            //J_Log.debug("sceneview", "looping");
         });
         editorLoop.getKeyFrames().add(tick);
     }

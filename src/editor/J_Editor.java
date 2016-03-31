@@ -26,12 +26,12 @@ public class J_Editor extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Tree View Sample");
 
-        Parent root = FXMLLoader.load(getClass().getResource("juggernaut.fxml"));
+        primaryStage = FXMLLoader.load(getClass().getResource("juggernaut.fxml"));
 
         JE_Renderer.GetInstance().Run();
 
-        primaryStage.setTitle("Juggernaut Engine [Editor]");
-        primaryStage.setScene(new Scene(root, 1280, 720));
+        //primaryStage.setTitle("");
+        //primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }
 

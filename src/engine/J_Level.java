@@ -1,6 +1,7 @@
 package engine;
 
 import engine.game_objects.J_GameObject;
+import javafx.collections.ObservableList;
 
 
 import java.io.*;
@@ -29,19 +30,17 @@ public class J_Level implements Externalizable
         return objects;
     }
 
-    public void SaveLevel(String name) throws IOException
+    public void SaveLevel(File level) throws IOException
     {
-        this.name = name;
-
-        FileOutputStream saveFile = new FileOutputStream(name + ".jLevel");
+        FileOutputStream saveFile = new FileOutputStream(level);
         ObjectOutputStream outStream = new ObjectOutputStream(saveFile);
         this.writeExternal(outStream);
         outStream.flush();
         saveFile.close();
     }
-    public void LoadLevel(String name) throws IOException, ClassNotFoundException
+    public void LoadLevel(File level) throws IOException, ClassNotFoundException
     {
-        FileInputStream loadFile = new FileInputStream(name + ".jLevel");
+        FileInputStream loadFile = new FileInputStream(level);
         ObjectInputStream inStream = new ObjectInputStream(loadFile);
         this.readExternal(inStream);
         inStream.close();
@@ -72,4 +71,5 @@ public class J_Level implements Externalizable
         name = in.readUTF();
         objects = (LinkedList<J_GameObject>)in.readObject();
     }
+
 }
