@@ -3,7 +3,9 @@ package editor;
 import engine.J_Level;
 import engine.game_objects.J_GameObject;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
@@ -11,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -19,6 +22,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Pair;
 
 import java.io.File;
 import java.io.IOException;
@@ -265,26 +269,68 @@ public class JE_Controller
         stage.setTitle("JavaDocs");
         stage.show();
     }
-    public void LoadChatRoom(ActionEvent actionEvent) throws IOException
+    public void LoadChatRoom(ActionEvent actionEvent)
     {
-        String chatIP = "127.0.0.1";
-        TextInputDialog ipDialog = new TextInputDialog("127.0.0.1");
-        ipDialog.initStyle(StageStyle.UNIFIED);
-        ipDialog.setTitle("Server IP Address");
-        ipDialog.setHeaderText("");
-        ipDialog.setContentText("Please enter the Server's IP Address: ");
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.initStyle(StageStyle.UNIFIED);
+        dialog.setTitle("ChatRoom Login");
+        dialog.setHeaderText("");
 
-        Optional<String> ip = ipDialog.showAndWait();
-        if(ip.isPresent()){
-            chatIP = ip.get();
-            Stage stage = FXMLLoader.load(getClass().getResource("chat-room.fxml"));
+        ButtonType login = new ButtonType("Login", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(login, ButtonType.CANCEL);
 
-            stage.setTitle("ChatRoom - " + chatIP);
-            stage.show();
-        }
+        GridPane dialogPane = new GridPane();
+        dialogPane.setHgap(10);
+        dialogPane.setVgap(10);
+        dialogPane.setPadding(new Insets(25,25,25,25));
+
+        TextField username = new TextField();
+        username.setPromptText("Username");
+        TextField ipAddress = new TextField();
+        ipAddress.setPromptText("Leave blank if hosting");
+
+        dialogPane.add(new Label("Username:"), 0, 0);
+        dialogPane.add(username, 1, 0);
+
+        dialogPane.add(new Label("Server IP:"), 0, 1);
+        dialogPane.add(ipAddress, 1, 1);
+
+        Node loginButton = dialog.getDialogPane().lookupButton(login);
+        loginButton.setDisable(true);
+
+        username.textProperty().addListener((observable, oldValue, newValue) -> {
+            loginButton.setDisable(newValue.trim().isEmpty());
+        });
+
+        dialog.getDialogPane().setContent(dialogPane);
 
 
+        dialog.setResultConverter(dialogButton -> {
+            if(dialogButton == login)
+                return new Pair<String, String>(username.getText(), ipAddress.getText());
+            return null;
+        });
 
 
+        Optional<Pair<String, String>> ip = dialog.showAndWait();
+        ip.ifPresent(result -> {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("chat-room.fxml"));
+
+            try {
+                Stage stage = loader.load();
+
+                J_ChatController chat = loader.<J_ChatController>getController();
+
+                chat.name = result.getKey();
+                chat.ip = result.getValue();
+
+                stage.setTitle("ChatRoom - " + chat.name);
+                stage.show();
+            }catch(IOException ioe)
+            {
+                ioe.printStackTrace();
+            }
+        });
     }
 }

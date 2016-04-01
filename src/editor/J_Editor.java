@@ -23,9 +23,12 @@ public class J_Editor extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Tree View Sample");
 
-        primaryStage = FXMLLoader.load(getClass().getResource("startup.fxml"));
+        //primaryStage = FXMLLoader.load(getClass().getResource("startup.fxml"));
+        //primaryStage = FXMLLoader.load(getClass().getResource("chat-room.fxml"));
+        primaryStage = FXMLLoader.load(getClass().getResource("juggernaut.fxml"));
 
         //JE_Renderer.GetInstance().Run();
+
 
         primaryStage.show();
     }
