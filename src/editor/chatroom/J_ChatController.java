@@ -1,4 +1,4 @@
-package editor;
+package editor.chatroom;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,7 +10,7 @@ import javafx.scene.input.KeyEvent;
 
 public class J_ChatController
 {
-    public String name;
+    public String name = "blah";
     public String ip;
 
     @FXML
@@ -21,6 +21,7 @@ public class J_ChatController
     public void initialize()
     {
         textArea.setWrapText(true);
+        textField.requestFocus();
         textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -34,7 +35,7 @@ public class J_ChatController
     {
         if(textField.getText().intern() != "")
         {
-            textArea.setText(textArea.getText() + name.toUpperCase() + ": " + textField.getText() + "\n");
+            textArea.setText(textArea.getText() + name + ": " + textField.getText() + "\n");
             textField.clear();
         }
     }

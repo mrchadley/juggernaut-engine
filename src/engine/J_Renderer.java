@@ -23,6 +23,9 @@ public class J_Renderer{
         root = new Group();
         scene = new Scene(root, width, height);
         root.getChildren().add(canvas);
+
+        SetCanvasScale();
+
         gc = canvas.getGraphicsContext2D();
     }
 
@@ -50,5 +53,14 @@ public class J_Renderer{
     public GraphicsContext GetGC()
     {
         return gc;
+    }
+
+    protected void SetCanvasScale()
+    {
+        canvas.scaleXProperty().bind(scene.widthProperty().divide(canvas.widthProperty()));
+        canvas.scaleYProperty().bind(canvas.scaleXProperty());
+
+        canvas.translateXProperty().bind(canvas.widthProperty().multiply(canvas.scaleXProperty().subtract(1).divide(2)));
+        canvas.translateYProperty().bind(canvas.heightProperty().multiply(canvas.scaleYProperty().subtract(1).divide(2)));
     }
 }

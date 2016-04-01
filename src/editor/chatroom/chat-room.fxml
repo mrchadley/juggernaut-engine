@@ -7,10 +7,10 @@
 <?import javafx.stage.Stage?>
 <?import javafx.scene.Scene?>
 <?import javafx.geometry.Insets?>
-<Stage fx:id="stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.J_ChatController">
+<Stage fx:id="stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.chatroom.J_ChatController">
     <scene>
         <Scene width="400" height="360">
-            <GridPane alignment="center" hgap="10" vgap="10">
+            <GridPane styleClass="grid-pane" alignment="center" hgap="10" vgap="10">
                 <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
 
                 <TextArea fx:id="textArea" editable="false" prefHeight="300" prefWidth="380" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>

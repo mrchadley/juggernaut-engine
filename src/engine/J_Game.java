@@ -15,8 +15,8 @@ import java.util.LinkedList;
 public abstract class J_Game extends Application
 {
     String name = "";
-    int width = 800;
-    int height = 600;
+    int width = 1280;
+    int height = 720;
     int fps = 30;
     LinkedList<J_Level> levels = new LinkedList<>();
     J_Engine engine = J_Engine.GetInstance();
@@ -28,7 +28,6 @@ public abstract class J_Game extends Application
 
         //load config
         J_Level testLevel = Load();
-
 
         try
         {

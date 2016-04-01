@@ -1,5 +1,6 @@
 package editor;
 
+import editor.chatroom.J_ChatController;
 import engine.J_Level;
 import engine.game_objects.J_GameObject;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.control.ComboBox;
@@ -81,6 +81,7 @@ public class JE_Controller
 
         renderer.SetCanvas(levelEditorCanvas);
         renderer.SetLevel(currentLevel);
+        renderer.Run();
      }
 
     public void setCanvasScale()
@@ -315,7 +316,7 @@ public class JE_Controller
         Optional<Pair<String, String>> ip = dialog.showAndWait();
         ip.ifPresent(result -> {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("chat-room.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("chatroom/chat-room.fxml"));
 
             try {
                 Stage stage = loader.load();
@@ -324,6 +325,15 @@ public class JE_Controller
 
                 chat.name = result.getKey();
                 chat.ip = result.getValue();
+
+                if(result.getValue().isEmpty())
+                {
+                    //chat.startServer()
+                }
+                else
+                {
+                    //chat.connectToServer();
+                }
 
                 stage.setTitle("ChatRoom - " + chat.name);
                 stage.show();

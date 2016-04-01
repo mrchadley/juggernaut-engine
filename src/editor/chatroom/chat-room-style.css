@@ -1,0 +1,61 @@
+.scroll-bar:vertical .track,
+.scroll-bar:horizontal .track
+{
+    -fx-background-color: #323232;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 5px;
+    -fx-border-radius: 0px;
+}
+.scroll-bar:vertical .thumb,
+.scroll-bar:horizontal .thumb
+{
+    -fx-background-color: #ffa300;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 5px;
+}
+.scroll-bar:vertical,
+.scroll-bar:horizontal
+{
+    -fx-background-color: #404040;
+}
+.text-area .content
+{
+    -fx-background-color: #404040;
+    -fx-border-color: #ffa300;
+    -fx-border-width: 2px;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 2px;
+}
+.text-area
+{
+    -fx-background-color: transparent;
+    -fx-background-radius: 2px;
+    -fx-border-color: transparent;
+    -fx-text-fill: #ffa300;
+}
+.text-field
+{
+    -fx-background-color: #404040;
+    -fx-border-color: #ffa300;
+    -fx-text-fill: #ffa300;
+    -fx-border-width: 1px;
+    -fx-background-radius: 2px;
+    -fx-border-radius: 2px;
+}
+.button
+{
+    -fx-background-color: #404040;
+    -fx-text-fill: #ffa300;
+    -fx-border-color: #404040;
+    -fx-border-radius: 2px;
+    -fx-border-width: 1px;
+    -fx-font-weight: 700;
+}
+.button:hover
+{
+    -fx-border-color: #ffa300;
+}
+.grid-pane
+{
+    -fx-background-color: #323232;
+}

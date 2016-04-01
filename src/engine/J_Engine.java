@@ -3,6 +3,7 @@ package engine;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -57,7 +58,8 @@ public class J_Engine
         gameloop.getKeyFrames().add(tick);
 
         primaryStage.setScene(renderer.GetScene());
-        //primaryStage.setResizable(false);
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         primaryStage.show();
     }
 
