@@ -1,16 +1,13 @@
-.label {
-    -fx-font-size: 30pt;
+
+.header {
+    -fx-font-size: 15pt;
+    -fx-font-family: "Red Seven";
+    -fx-text-fill: #ffa300;
+    -fx-text-alignment: center;
+}
+
+.back {
+    -fx-background-color: #323232;
 }
 
 
-
-.button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
