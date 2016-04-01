@@ -2,6 +2,9 @@ package editor;
 
 import engine.J_Level;
 import engine.game_objects.J_GameObject;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
@@ -9,10 +12,13 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.control.ComboBox;
+import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +42,7 @@ public class JE_Controller
     @FXML private TreeView<File> locationTreeView;
     @FXML private ComboBox<String> colorCombo;
 
-    @FXML private HBox propertiesPane;
+    @FXML private VBox propertiesPane;
     @FXML private TreeView<String> levelOutliner;
 
     private final String defaultTitle = "Juggernaut Engine [Editor]";
@@ -218,15 +224,15 @@ public class JE_Controller
 
     public void NewProject(ActionEvent actionEvent)
     {
-        Alert newLevelAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        newLevelAlert.setTitle("Create New Project?");
-        newLevelAlert.setHeaderText("Any unsaved changes will be overwritten.");
-        newLevelAlert.setGraphic(null);
-        newLevelAlert.setContentText("Do you wish to continue?");
+        Alert newProjectAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        newProjectAlert.setTitle("Create New Project?");
+        newProjectAlert.setHeaderText("Any unsaved changes will be overwritten.");
+        newProjectAlert.setGraphic(null);
+        newProjectAlert.setContentText("Do you wish to continue?");
 
-        newLevelAlert.getButtonTypes().setAll(yes, no);
+        newProjectAlert.getButtonTypes().setAll(yes, no);
 
-        Optional<ButtonType> result = newLevelAlert.showAndWait();
+        Optional<ButtonType> result = newProjectAlert.showAndWait();
         if(result.get() == yes)
         {
             TextInputDialog newProjectDialog = new TextInputDialog();
@@ -243,6 +249,42 @@ public class JE_Controller
     }
     public void OpenProject(ActionEvent actionEvent)
     {
+
+    }
+    public void LoadJavaDocs(ActionEvent actionEvent)
+    {
+        Stage stage = new Stage();
+        Group root = new Group();
+        WebView webView = new WebView();
+        webView.getEngine().load("https://docs.oracle.com/javase/7/docs/api/");
+
+        root.getChildren().add(webView);
+        Scene scene = new Scene(root, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("juggernaut-style.css").toString());
+        stage.setScene(scene);
+        stage.setTitle("JavaDocs");
+        stage.show();
+    }
+    public void LoadChatRoom(ActionEvent actionEvent) throws IOException
+    {
+        String chatIP = "127.0.0.1";
+        TextInputDialog ipDialog = new TextInputDialog("127.0.0.1");
+        ipDialog.initStyle(StageStyle.UNIFIED);
+        ipDialog.setTitle("Server IP Address");
+        ipDialog.setHeaderText("");
+        ipDialog.setContentText("Please enter the Server's IP Address: ");
+
+        Optional<String> ip = ipDialog.showAndWait();
+        if(ip.isPresent()){
+            chatIP = ip.get();
+            Stage stage = FXMLLoader.load(getClass().getResource("chat-room.fxml"));
+
+            stage.setTitle("ChatRoom - " + chatIP);
+            stage.show();
+        }
+
+
+
 
     }
 }

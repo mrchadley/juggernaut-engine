@@ -40,7 +40,12 @@
                                 </Menu>
                                 <Menu text="Tools"></Menu>
                                 <Menu text="Window"></Menu>
-                                <Menu text="Help"></Menu>
+                                <Menu text="Help">
+                                    <items>
+                                        <MenuItem text="JavaDocs" onAction="#LoadJavaDocs"/>
+                                        <MenuItem text="ChatRoom" onAction="#LoadChatRoom"/>
+                                    </items>
+                                </Menu>
                             </menus>
                         </MenuBar>
                         <HBox prefHeight="50">
@@ -56,11 +61,11 @@
                 <right>
                     <SplitPane orientation="VERTICAL" >
                         <VBox prefWidth="300">
-                            <SplitPane orientation="VERTICAL" styleClass="properties">
+                            <SplitPane orientation="VERTICAL" styleClass="">
                                 <Label text="Properties"/>
-                                <HBox fx:id="propertiesPane" prefWidth="300">
+                                <VBox fx:id="propertiesPane" styleClass="properties" prefWidth="300">
 
-                                </HBox>
+                                </VBox>
                             </SplitPane>
 
                         </VBox>

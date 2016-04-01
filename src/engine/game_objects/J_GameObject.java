@@ -62,7 +62,6 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
         }*/
     }
 
-    @Override
     public void DisplayProperties() {
 
     }
@@ -80,7 +79,6 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
         }
         return null;
     }
-
 
     public void SetRenderer(J_RendererComponent renderer) {
         this.renderer = renderer;

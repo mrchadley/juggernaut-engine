@@ -7,7 +7,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import javafx.application.Application;
@@ -23,11 +22,12 @@ public class J_Editor extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Juggernaut Editor");
+        primaryStage.setTitle("Tree View Sample");
 
+        primaryStage = FXMLLoader.load(getClass().getResource("juggernaut.fxml"));
 
-        primaryStage = FXMLLoader.load(getClass().getResource("startup.fxml"));
-        //JE_Renderer.GetInstance().Run();
+        JE_Renderer.GetInstance().Run();
+
         primaryStage.show();
     }
 

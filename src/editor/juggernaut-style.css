@@ -1,22 +1,31 @@
-.menu-item,
-.menu-item .label,
-.context-menu,
 .menu,
-.menu .label,
+.context-menu,
 .menu-bar
 {
-    -fx-background-color: #393939;
-    -fx-text-fill: deepskyblue;
+    -fx-background-color: #323232;
 }
 
-.menu:showing,
-.menu:showing .label,
-.menu:hover,
-.menu:hover .label,
-
-.menu-item:focused,
-.menu-item:focused .label
+.menu-button .label, .menuItem .label
 {
-    -fx-background-color: deepskyblue;
-    -fx-text-fill: #393939;
+    -fx-text-fill: #ffa300;
+    -fx-font-weight: 800;
+}
+
+.menu-button:focused, .menu-button:hover
+{
+    -fx-background-color: #ffa300;
+}
+.menu-button:focused .label, .menu-button:hover .label
+{
+    -fx-text-fill: #323232;
+}
+
+
+.menu-item:focused, .menu-item:hover
+{
+    -fx-background-color: #ffa300;
+}
+.menu-item:focused .label, .menu-item:hover .label
+{
+    -fx-text-fill: #323232;
 }
