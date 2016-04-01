@@ -9,12 +9,23 @@
 <?import javafx.scene.Scene?>
 <?import javafx.scene.text.Text?>
 <?import javafx.geometry.Insets?>
-<Stage fx:id="initial" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.JE_startup">
+<Stage resizable="false" fx:id="initial" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.JE_startup">
     <scene>
-        <Scene width="480" height="640">
-            <GridPane fx:id="layout">
+        <Scene width="350" height="350">
+            <GridPane alignment="TOP_CENTER" fx:id="layout" hgap="10" vgap="10">
+                <HBox spacing="10" alignment="BOTTOM_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="0">
                 <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
-                <Label id="title1" fx:id="title1" text="Juggernaut Engine"/>
+                <Label fx:id="header"/>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                <Button fx:id="newProject" onAction="#newProj"/>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="6">
+                    <Button fx:id="openProject" onAction="#openProj"/>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="9">
+                    <Button fx:id="exitProject" onAction="#exit"/>
+                </HBox>
                 <stylesheets>
                     <URL value="@startup-style.css" />
                 </stylesheets>
