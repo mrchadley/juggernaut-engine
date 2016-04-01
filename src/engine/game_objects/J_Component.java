@@ -11,4 +11,5 @@ public abstract class J_Component implements J_Updatable, Externalizable
     {
         obj.AddComponent(this);
     }
+    public abstract void DisplayProperties();
 }

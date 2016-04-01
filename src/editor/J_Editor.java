@@ -2,8 +2,7 @@ package editor;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.paint.Color;
@@ -11,7 +10,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -30,8 +28,6 @@ public class J_Editor extends Application {
 
         JE_Renderer.GetInstance().Run();
 
-        //primaryStage.setTitle("");
-        //primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }
 
