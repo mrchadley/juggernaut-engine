@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 public class JE_startup {
 
     @FXML
-    public Label title;
 
 
     public void initialize() {
@@ -22,7 +21,6 @@ public class JE_startup {
 
         //title = new Label();
         //title.setText("JUG");
-        //title.setFont(Font.loadFont("redseven.otf", 120));
         //primaryStage = FXMLLoader.load(getClass().getResource("startup.fxml"));
 
 

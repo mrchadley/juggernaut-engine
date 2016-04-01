@@ -1,15 +1,5 @@
-@font-face {
-    font-family: redseven;
-    src: url("redseven.otf");
-}
-
-#title {
-    -fx-font-family: redseven;
-}
-
-.text {
+.label {
     -fx-font-size: 30pt;
-    -fx-font-family: "redseven";
 }
 
 

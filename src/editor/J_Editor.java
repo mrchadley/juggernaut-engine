@@ -24,9 +24,9 @@ public class J_Editor extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Tree View Sample");
 
-        primaryStage = FXMLLoader.load(getClass().getResource("juggernaut.fxml"));
+        primaryStage = FXMLLoader.load(getClass().getResource("startup.fxml"));
 
-        JE_Renderer.GetInstance().Run();
+        //JE_Renderer.GetInstance().Run();
 
         primaryStage.show();
     }

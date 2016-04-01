@@ -14,7 +14,7 @@
         <Scene width="480" height="640">
             <GridPane fx:id="layout">
                 <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
-                <Text id="title" text="Juggernaut Engine"/>
+                <Label id="title1" fx:id="title1" text="Juggernaut Engine"/>
                 <stylesheets>
                     <URL value="@startup-style.css" />
                 </stylesheets>
