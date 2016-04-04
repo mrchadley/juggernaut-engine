@@ -1,5 +1,6 @@
 package editor;
 
+import editor.chatroom.ChatServer;
 import editor.chatroom.J_ChatController;
 import engine.J_Level;
 import engine.game_objects.J_GameObject;
@@ -26,6 +27,7 @@ import javafx.util.Pair;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -324,15 +326,14 @@ public class JE_Controller
                 J_ChatController chat = loader.<J_ChatController>getController();
 
                 chat.name = result.getKey();
-                chat.ip = result.getValue();
 
                 if(result.getValue().isEmpty())
                 {
-                    //chat.startServer()
+                    //Start chat server
                 }
                 else
                 {
-                    //chat.connectToServer();
+                    //connect to chat
                 }
 
                 stage.setTitle("ChatRoom - " + chat.name);

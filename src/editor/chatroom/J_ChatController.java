@@ -8,10 +8,24 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 public class J_ChatController
 {
     public String name = "blah";
-    public String ip;
+
+    public boolean serverFlag = false;
+
+    public Socket socket;
+    public ServerSocket server;
+
+    public PrintWriter output;
+    public BufferedReader input;
 
     @FXML
     TextField textField;
@@ -25,18 +39,17 @@ public class J_ChatController
         textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if(event.getCode() == KeyCode.ENTER)
-                    SendMessage(null);
+                //if(event.getCode() == KeyCode.ENTER)
+                    //SendMessage(null);
             }
         });
     }
-
-    public void SendMessage(ActionEvent actionEvent)
+    public void StartChatServer() throws IOException
     {
-        if(textField.getText().intern() != "")
-        {
-            textArea.setText(textArea.getText() + name + ": " + textField.getText() + "\n");
-            textField.clear();
-        }
+        server = new ServerSocket(8080);
+        socket = server.accept();
+        ChatThread thread = new ChatThread(socket, textArea);
+        thread.run();
     }
+
 }
