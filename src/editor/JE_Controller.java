@@ -48,7 +48,7 @@ public class JE_Controller
     @FXML private TreeView<File> locationTreeView;
     @FXML private ComboBox<String> colorCombo;
 
-    @FXML private VBox propertiesPane;
+    @FXML private Tab propertiesTab;
     @FXML private TreeView<String> levelOutliner;
 
     private final String defaultTitle = "Juggernaut Engine [Editor]";

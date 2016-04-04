@@ -5,7 +5,13 @@ import engine.framework.J_Drawable;
 import engine.framework.J_Updatable;
 import engine.framework.Vector2;
 import engine.game_objects.render_components.J_RendererComponent;
+import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 import java.io.*;
 import java.util.LinkedList;
@@ -60,10 +66,6 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
                 temp.Draw(gc);
             }
         }*/
-    }
-
-    public void DisplayProperties() {
-
     }
 
     public J_Transform GetTransform()
@@ -169,5 +171,22 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
 
     public J_GameObject GetParent() {
         return parent;
+    }
+
+    public Node DisplayProperties()
+    {
+        SplitPane properties = new SplitPane();
+        properties.setOrientation(Orientation.VERTICAL);
+
+        GridPane goPane = new GridPane();
+
+        TextField nameField = new TextField(name);
+
+        goPane.add(new Label("Username:"), 0, 0);
+        goPane.add(nameField, 1, 0);
+
+        properties.getItems().add(goPane);
+
+        return properties;
     }
 }

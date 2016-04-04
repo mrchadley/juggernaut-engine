@@ -61,12 +61,9 @@
                 <right>
                     <SplitPane orientation="VERTICAL" >
                         <VBox prefWidth="300">
-                            <SplitPane orientation="VERTICAL" styleClass="">
-                                <Label text="Properties"/>
-                                <VBox fx:id="propertiesPane" styleClass="properties" prefWidth="300">
-
-                                </VBox>
-                            </SplitPane>
+                            <TabPane >
+                                <Tab fx:id="propertiesTab"/>
+                            </TabPane>
 
                         </VBox>
                         <TabPane >
