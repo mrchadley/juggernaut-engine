@@ -7,49 +7,68 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
 
-public class J_ChatController
+
+public class J_ChatController implements Runnable
 {
     public String name = "blah";
+    public String ip;
 
     public boolean serverFlag = false;
 
-    public Socket socket;
-    public ServerSocket server;
+    public ClientThread client;
+    public ServerThread server;
 
-    public PrintWriter output;
-    public BufferedReader input;
 
     @FXML
     TextField textField;
     @FXML
     TextArea textArea;
 
-    public void initialize()
+    public void initialize() throws IOException
     {
         textArea.setWrapText(true);
         textField.requestFocus();
         textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                //if(event.getCode() == KeyCode.ENTER)
-                    //SendMessage(null);
+                if(event.getCode() == KeyCode.ENTER)
+                    SendMessage(null);
             }
         });
     }
-    public void StartChatServer() throws IOException
+
+    public void SendMessage(ActionEvent actionEvent)
     {
-        server = new ServerSocket(8080);
-        socket = server.accept();
-        ChatThread thread = new ChatThread(socket, textArea);
-        thread.run();
+        String msg = textField.getText();
+
+        if(serverFlag)
+            server.SendMessage(msg);
+        else
+            client.SendMessage(msg);
+        textField.clear();
     }
 
+    public void StartChatServer()
+    {
+        System.out.println("StartChatServer()");
+
+        ServerThread server = new ServerThread(textArea);
+        server.run();
+    }
+
+    public void ConnectToServer()
+    {
+        ClientThread client = new ClientThread(ip, textArea);
+        client.run();
+    }
+
+    @Override
+    public void run() {
+        if(serverFlag)
+            StartChatServer();
+        else
+            ConnectToServer();
+    }
 }

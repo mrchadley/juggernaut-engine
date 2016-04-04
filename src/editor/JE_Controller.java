@@ -1,6 +1,5 @@
 package editor;
 
-import editor.chatroom.ChatServer;
 import editor.chatroom.J_ChatController;
 import engine.J_Level;
 import engine.game_objects.J_GameObject;
@@ -27,7 +26,6 @@ import javafx.util.Pair;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -101,23 +99,23 @@ public class JE_Controller
     public void loadTreeItems(File dir) {
         TreeItem<File> root = new TreeItem<>(new File("Files:"));
         root.setExpanded(true);
-        try {
+        //try {
             File[] files = dir.listFiles();
             for (File file : files) {
                 if (file.isDirectory()) {
-                    System.out.println("directory:" + file.getCanonicalPath());
+                   // System.out.println("directory:" + file.getCanonicalPath());
                     loadTreeItems(file);
                 } else {
-                    System.out.println("     file:" + file.getCanonicalPath());
+                   // System.out.println("     file:" + file.getCanonicalPath());
                     root.getChildren().add(new TreeItem<>(file));
                 }
                 root.getChildren().add(new TreeItem<>(file));
             }
 
             locationTreeView.setRoot(root);
-        } catch (IOException e) {
+        /*} catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void test(ActionEvent actionEvent)
@@ -326,16 +324,25 @@ public class JE_Controller
                 J_ChatController chat = loader.<J_ChatController>getController();
 
                 chat.name = result.getKey();
+                String ipAddr = result.getValue();
 
-                if(result.getValue().isEmpty())
+                System.out.println("ip: " + ipAddr);
+
+                if(result.getValue().intern() == "")
                 {
                     //Start chat server
+                    chat.serverFlag = true;
+                    System.out.println("blah");
                 }
                 else
                 {
                     //connect to chat
+                    chat.serverFlag = false;
+                    chat.ip = result.getValue();
                 }
-
+                //chat.run();
+                Thread t = new Thread(chat);
+                //t.run();
                 stage.setTitle("ChatRoom - " + chat.name);
                 stage.show();
             }catch(IOException ioe)

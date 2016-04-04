@@ -7,7 +7,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ChatThread extends Thread
+public class ClientThread extends Thread
 {
     private Socket clientSocket;
 
@@ -16,11 +16,18 @@ public class ChatThread extends Thread
 
     private TextArea chat;
 
-    public ChatThread(Socket connection, TextArea text)
+    public ClientThread(String ip, TextArea text)
     {
-        super(connection.toString());
-        clientSocket = connection;
+        try {
+            clientSocket = new Socket(ip, 8080);
+        }
+        catch(IOException ioe)
+        {
+            ioe.printStackTrace();
+        }
         chat = text;
+
+        System.out.println("initializing client");
 
         try {
             input = new Scanner(clientSocket.getInputStream());
@@ -31,13 +38,11 @@ public class ChatThread extends Thread
             ioe.printStackTrace();
         }
     }
-
     public void SendMessage(String msg)
     {
         output.println(msg);
         output.flush();
     }
-
     @Override public void run()
     {
         while(true)
@@ -45,10 +50,7 @@ public class ChatThread extends Thread
             if(input.hasNextLine())
             {
                 String msg = input.nextLine();
-                //print msg to server screen
                 chat.setText(chat.getText() + msg);
-                output.println(msg);
-                output.flush();
             }
         }
     }
