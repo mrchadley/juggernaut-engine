@@ -6,7 +6,6 @@
     -fx-background-color: #323232;
 
 }
-
 .menu-button .label
 {
     -fx-text-fill: #ffa300;
@@ -16,7 +15,6 @@
 .menu-item .label {
     -fx-text-fill: #ffa300;
 }
-
 .menu-button:focused
 {
     -fx-background-color: #ffa300;
@@ -25,8 +23,6 @@
 {
     -fx-text-fill: #323232;
 }
-
-
 .menu-item:focused
 {
     -fx-background-color: #ffa300;
