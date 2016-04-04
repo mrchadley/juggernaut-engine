@@ -1,7 +1,9 @@
 package editor.chatroom;
 
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,19 +20,37 @@ public class ServerThread extends Thread
 
     private TextArea chat;
 
-    public ServerThread(TextArea text)
+    public ServerThread(String name)
     {
-        chat = text;
+        try
+        {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("chat-room.fxml"));
+
+            Stage stage = loader.load();
+            J_ChatController chatController = loader.<J_ChatController>getController();
+
+            chatController.name = name;
+            chatController.serverFlag = true;
+            chatController.server = this;
+            chat = chatController.GetChat();
+
+            stage.setTitle("JuggernautChat<Server> - " + name);
+            stage.show();
+            this.start();
+        }
+        catch(IOException ioe)
+        {
+            ioe.printStackTrace();
+        }
     }
     public void SendMessage(String msg)
     {
+        chat.setText(chat.getText() + msg + "\n");
         output.println(msg);
         output.flush();
     }
     @Override public void run()
     {
-        System.out.println("starting server");
-
         try {
             ServerSocket serverSocket = new ServerSocket(8080);
 
@@ -49,7 +69,7 @@ public class ServerThread extends Thread
             if(input.hasNextLine())
             {
                 String msg = input.nextLine();
-                chat.setText(chat.getText() + msg);
+                chat.setText(chat.getText() + msg + "\n");
 
                 output.println(msg);
                 output.flush();

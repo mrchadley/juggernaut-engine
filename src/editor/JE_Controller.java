@@ -1,6 +1,8 @@
 package editor;
 
+import editor.chatroom.ClientThread;
 import editor.chatroom.J_ChatController;
+import editor.chatroom.ServerThread;
 import engine.J_Level;
 import engine.game_objects.J_GameObject;
 import javafx.fxml.FXMLLoader;
@@ -315,39 +317,15 @@ public class JE_Controller
 
         Optional<Pair<String, String>> ip = dialog.showAndWait();
         ip.ifPresent(result -> {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("chatroom/chat-room.fxml"));
-
-            try {
-                Stage stage = loader.load();
-
-                J_ChatController chat = loader.<J_ChatController>getController();
-
-                chat.name = result.getKey();
-                String ipAddr = result.getValue();
-
-                System.out.println("ip: " + ipAddr);
-
-                if(result.getValue().intern() == "")
-                {
-                    //Start chat server
-                    chat.serverFlag = true;
-                    System.out.println("blah");
-                }
-                else
-                {
-                    //connect to chat
-                    chat.serverFlag = false;
-                    chat.ip = result.getValue();
-                }
-                //chat.run();
-                Thread t = new Thread(chat);
-                //t.run();
-                stage.setTitle("ChatRoom - " + chat.name);
-                stage.show();
-            }catch(IOException ioe)
+            if(result.getValue().intern() == "")
             {
-                ioe.printStackTrace();
+                System.out.println("no ip");
+                ServerThread serverThread = new ServerThread(result.getKey());
+            }
+            else
+            {
+                System.out.println(result.getValue());
+                ClientThread clientThread = new ClientThread(result.getValue(), result.getKey());
             }
         });
     }

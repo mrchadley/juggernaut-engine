@@ -37,6 +37,8 @@ public class J_ChatController implements Runnable
                     SendMessage(null);
             }
         });
+        Thread t = new Thread(this);
+        t.run();
     }
 
     public void SendMessage(ActionEvent actionEvent)
@@ -44,31 +46,23 @@ public class J_ChatController implements Runnable
         String msg = textField.getText();
 
         if(serverFlag)
-            server.SendMessage(msg);
+            server.SendMessage(name + ": " + msg);
         else
-            client.SendMessage(msg);
+            client.SendMessage(name + ": " + msg);
+
+        //textArea.setText(textArea.getText() + name + ": " + textField.getText() + "\n");
         textField.clear();
     }
 
-    public void StartChatServer()
+    public TextArea GetChat()
     {
-        System.out.println("StartChatServer()");
-
-        ServerThread server = new ServerThread(textArea);
-        server.run();
+        return textArea;
     }
 
-    public void ConnectToServer()
-    {
-        ClientThread client = new ClientThread(ip, textArea);
-        client.run();
-    }
 
     @Override
-    public void run() {
-        if(serverFlag)
-            StartChatServer();
-        else
-            ConnectToServer();
+    public void run()
+    {
+
     }
 }

@@ -1,31 +1,37 @@
 .menu,
 .context-menu,
-.menu-bar
+.menu-bar,
+.menu-button
 {
     -fx-background-color: #323232;
+
 }
 
-.menu-button .label, .menuItem .label
+.menu-button .label
 {
     -fx-text-fill: #ffa300;
     -fx-font-weight: 800;
 }
 
-.menu-button:focused, .menu-button:hover
+.menu-item .label {
+    -fx-text-fill: #ffa300;
+}
+
+.menu-button:focused
 {
     -fx-background-color: #ffa300;
 }
-.menu-button:focused .label, .menu-button:hover .label
+.menu-button:focused .label
 {
     -fx-text-fill: #323232;
 }
 
 
-.menu-item:focused, .menu-item:hover
+.menu-item:focused
 {
     -fx-background-color: #ffa300;
 }
-.menu-item:focused .label, .menu-item:hover .label
+.menu-item:focused .label
 {
     -fx-text-fill: #323232;
 }
