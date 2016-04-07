@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.control.ComboBox;
@@ -38,18 +39,17 @@ public class JE_Controller
     @FXML private Stage stage;
     @FXML private BorderPane layout;
     @FXML private Canvas levelEditorCanvas;
-    @FXML private TextField x;
-    @FXML private TextField y;
-    @FXML private TextField w;
-    @FXML private TextField h;
     @FXML private BorderPane border;
     @FXML private Tab ProjectTab;
     @FXML private Tab OutlinerTab;
     @FXML private TreeView<File> locationTreeView;
-    @FXML private ComboBox<String> colorCombo;
+
+
+    @FXML private VBox sidePanel;
+    @FXML private TabPane propertiesPanel;
 
     @FXML private Tab propertiesTab;
-    @FXML private TreeView<String> levelOutliner;
+    @FXML private TreeView<J_GameObject> levelOutliner;
 
     private final String defaultTitle = "Juggernaut Engine [Editor]";
 
@@ -70,22 +70,27 @@ public class JE_Controller
         setCanvasScale();
 
         levelOutliner.setShowRoot(false);
-        TreeItem<String> root = new TreeItem<>();
-        for(J_GameObject obj : currentLevel.GetObjects())
-        {
-            TreeItem<String> item = new TreeItem<>(obj.GetName());
-            root.getChildren().add(item);
-        }
+        TreeItem<J_GameObject> root = new TreeItem<>();
         levelOutliner.setRoot(root);
+        levelOutliner.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            TreeItem<J_GameObject> selectedObj = (TreeItem<J_GameObject>)newValue;
+            DisplayProperties(selectedObj.getValue());
+        });
+
+        UpdateOutliner();
 
         File currentDir = new File("src/"); // current directory
         loadTreeItems(currentDir);
 
+        renderer.controller = this;
         renderer.SetCanvas(levelEditorCanvas);
         renderer.SetLevel(currentLevel);
         renderer.Run();
-     }
 
+        sidePanel.setPrefWidth(320);
+        propertiesPanel.prefHeightProperty().bind(stage.heightProperty().multiply(.5));
+        stage.setMaximized(true);
+     }
     public void setCanvasScale()
     {
         levelEditorCanvas.setWidth(1280);
@@ -97,7 +102,6 @@ public class JE_Controller
         levelEditorCanvas.translateXProperty().bind(levelEditorCanvas.widthProperty().multiply(levelEditorCanvas.scaleXProperty().subtract(1).divide(2)).add(20));
         levelEditorCanvas.translateYProperty().bind(levelEditorCanvas.heightProperty().multiply(levelEditorCanvas.scaleYProperty().subtract(1).divide(2)).add(20));
     }
-
     public void loadTreeItems(File dir) {
         TreeItem<File> root = new TreeItem<>(new File("Files:"));
         root.setExpanded(true);
@@ -125,31 +129,6 @@ public class JE_Controller
         renderer.SetRunning(!renderer.isRunning());
     }
 
-    public void addObject(ActionEvent actionEvent)
-    {
-        float _x = Float.parseFloat(x.getText());
-        float _y = Float.parseFloat(y.getText());
-        float _w = Float.parseFloat(w.getText());
-        float _h = Float.parseFloat(h.getText());
-        String _c = colorCombo.getValue().toLowerCase();
-        // NEED MORE COLORS
-        colors.put("red", Color.RED);
-        colors.put("blue", Color.BLUE);
-        colors.put("green", Color.GREEN);
-
-        //Rectangle newObj = new Rectangle(new Vector2(_x, _y), new Vector2(_w, _h), colors.get(_c.toLowerCase()));
-        x.clear();
-        x.setText("0");
-        y.clear();
-        y.setText("0");
-        w.clear();
-        w.setText("0");
-        h.clear();
-        h.setText("0");
-
-        //currentLevel.AddObject(newObj);
-    }
-
     public void NewLevel(ActionEvent actionEvent)
     {
         Alert newLevelAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -165,7 +144,7 @@ public class JE_Controller
         {
             currentLevel = new J_Level();
             renderer.SetLevel(currentLevel);
-            levelOutliner.getRoot().getChildren().clear();
+            UpdateOutliner();
             currentLevelFile = null;
         }
     }
@@ -197,6 +176,7 @@ public class JE_Controller
                 }
             }
         }
+        UpdateOutliner();
     }
     public void SaveLevel(ActionEvent actionEvent)
     {
@@ -227,8 +207,6 @@ public class JE_Controller
             }
         }
     }
-
-
     public void NewProject(ActionEvent actionEvent)
     {
         Alert newProjectAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -328,5 +306,31 @@ public class JE_Controller
                 ClientThread clientThread = new ClientThread(result.getValue(), result.getKey());
             }
         });
+    }
+    public void UpdateOutliner()
+    {
+        levelOutliner.getRoot().getChildren().clear();
+        for(J_GameObject obj : currentLevel.GetObjects())
+        {
+            TreeItem<J_GameObject> item = new TreeItem<>(obj);
+            levelOutliner.getRoot().getChildren().add(item);
+        }
+    }
+    public void DisplayProperties(ActionEvent actionEvent)
+    {
+        Pane test = currentLevel.GetObjects().get(3).GetProperties(this);
+        ScrollPane scrollPane = new ScrollPane(test);
+        scrollPane.setPadding(new Insets(0, 10, 0, 10));
+        scrollPane.prefViewportHeightProperty().bind(propertiesTab.getTabPane().tabMaxHeightProperty());
+        propertiesTab.setContent(scrollPane);
+    }
+
+    public void DisplayProperties(J_GameObject obj)
+    {
+        Pane test = obj.GetProperties(this);
+        ScrollPane scrollPane = new ScrollPane(test);
+        scrollPane.setPadding(new Insets(0, 10, 0, 10));
+        scrollPane.prefViewportHeightProperty().bind(propertiesTab.getTabPane().tabMaxHeightProperty());
+        propertiesTab.setContent(scrollPane);
     }
 }

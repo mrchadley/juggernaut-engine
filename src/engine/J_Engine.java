@@ -89,6 +89,10 @@ public class J_Engine
         return currentLevel;
     }
 
+    public J_InputHandler GetInputHandler() {
+        return inputHandler;
+    }
+
     public static J_Engine GetInstance()
     {
         return instance;

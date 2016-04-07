@@ -2,6 +2,12 @@ package engine.game_objects;
 
 import engine.J_Log;
 import engine.framework.Vector2;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -24,7 +30,6 @@ public class J_Transform extends J_Component {
         positionCenter = new Vector2();
         size = new Vector2();
     }
-
     public J_Transform(Vector2 pos, Vector2 size)
     {
         J_Log.debug("j_transform", "initializing");
@@ -34,7 +39,6 @@ public class J_Transform extends J_Component {
 
         position = positionCenter.add(size.multiply(-0.5f));
     }
-
     public Vector2 GetCorner()
     {
         return position;
@@ -74,12 +78,10 @@ public class J_Transform extends J_Component {
         }
         position = positionCenter.add(size.multiply(-0.5f));
     }
-
     public void Move(Vector2 amount) //moves object in relation to parent
     {
         localPosition = localPosition.add(amount);
     }
-
     public void SetParent(J_Transform parent)
     {
         this.localPosition = ComputeLocalPos(parent, this);
@@ -114,11 +116,77 @@ public class J_Transform extends J_Component {
             return child.positionCenter;
     }
 
-    public void DisplayProperties()
+    @Override
+    public TitledPane GetProperties()
     {
+        TitledPane transformPane = new TitledPane();
+        transformPane.setText("Transform");
 
+        GridPane transformContent = new GridPane();
+        transformContent.setPadding(new Insets(10,15,10,15));
+        transformContent.setHgap(5);
+        transformContent.setVgap(5);
+
+        TextField xPosField = new TextField(localPosition.getX() + "");
+        xPosField.setPrefWidth(75);
+        xPosField.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER)
+            {
+                System.out.println("text: " + xPosField.getText());
+                System.out.println("float: " + Float.parseFloat(xPosField.getText()));
+
+                localPosition.setX(Float.parseFloat(xPosField.getText()));
+                System.out.println("localPosX: " + localPosition.getX());
+                System.out.println("centerPosX: " + positionCenter.getX());
+                System.out.println("posX: " + position.getX());
+            }
+        });
+
+        TextField yPosField = new TextField(localPosition.getY() + "");
+        yPosField.setPrefWidth(75);
+        yPosField.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER)
+            {
+                localPosition.setY(Float.parseFloat(yPosField.getText()));
+            }
+        });
+
+        TextField xSizeField = new TextField(size.getX() + "");
+        xSizeField.setPrefWidth(75);
+        xSizeField.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER)
+            {
+                size.setX(Float.parseFloat(xSizeField.getText()));
+            }
+        });
+
+        TextField ySizeField = new TextField(size.getY() + "");
+        ySizeField.setPrefWidth(75);
+        ySizeField.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER)
+            {
+                size.setY(Float.parseFloat(ySizeField.getText()));
+            }
+        });
+
+        Label positionLabel = new Label("Position:");
+        transformContent.add(positionLabel, 0, 0);
+        transformContent.add(new Label("x:"), 1, 0);
+        transformContent.add(xPosField, 2, 0);
+        transformContent.add(new Label("y:"), 3, 0);
+        transformContent.add(yPosField, 4, 0);
+
+        Label sizeLabel = new Label("Size:");
+        transformContent.add(sizeLabel, 0, 1);
+        transformContent.add(new Label("x:"), 1, 1);
+        transformContent.add(xSizeField, 2, 1);
+        transformContent.add(new Label("y:"), 3, 1);
+        transformContent.add(ySizeField, 4, 1);
+
+        transformPane.setContent(transformContent);
+
+        return transformPane;
     }
-
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException
@@ -162,5 +230,10 @@ public class J_Transform extends J_Component {
             for(J_Transform child : children)
                 output += (" \n~" + child.toString());
         return output + "]";
+    }
+
+    @Override
+    public void SetTransform(J_Transform newTransform) {
+
     }
 }

@@ -1,9 +1,11 @@
 
 .header {
+
     -fx-font-size: 15pt;
     -fx-font-family: "Red Seven";
     -fx-text-fill: #ffa300;
-    -fx-text-alignment: center;
+    -fx-text-alignment: left;
+    -fx-font-weight: bolder;
 }
 
 .back {

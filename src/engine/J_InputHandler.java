@@ -68,7 +68,6 @@ public class J_InputHandler implements EventHandler<InputEvent>
         }
     }
 
-    //@Override
     public void Update()
     {
         for(int i = 0; i < MAX_KEY_ORDINAL; i++) //updates the keyQueues for the KeyDown and KeyUp methods
@@ -99,52 +98,6 @@ public class J_InputHandler implements EventHandler<InputEvent>
 
         //super.Update();
     }
-
-
-    /*
-    public void KeyPressed(KeyEvent event)
-    {
-        AddEvent(event);
-    }
-    public void KeyReleased(KeyEvent event)
-    {
-        AddEvent(event);
-    }
-    public void KeyTyped(KeyEvent event)
-    {
-        AddEvent(event);
-    }
-
-    public void MouseClicked(MouseEvent event)
-    {
-        AddEvent(event);
-    }
-    public void MousePressed(MouseEvent event)
-    {
-        AddEvent(event);
-    }
-    public void MouseReleased(MouseEvent event)
-    {
-        AddEvent(event);
-    }
-    public void MouseEntered(MouseEvent event)
-    {
-        AddEvent(event);
-    }
-    public void MouseExited(MouseEvent event)
-    {
-        AddEvent(event);
-    }
-    public void MouseDragged(MouseEvent event)
-    {
-        AddEvent(event);
-    }
-
-    public void MouseWheelMoved(ScrollEvent event)
-    {
-        AddEvent(event);
-    }
-    */
 
     //return true while key is being held down
     //returns false if the key is not pressed

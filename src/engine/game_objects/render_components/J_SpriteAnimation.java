@@ -3,6 +3,7 @@ package engine.game_objects.render_components;
 import engine.framework.Vector2;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
@@ -139,12 +140,13 @@ public class J_SpriteAnimation implements Externalizable
 
         this.frameCount = in.readInt();
         this.frameOffset = in.readFloat();
-        this.frame = in.readInt();;
+        this.frame = in.readInt();
         this.frameLength = in.readFloat();
         this.playing = in.readBoolean();
         this.loopable = in.readBoolean();
         this.frameSize = (Vector2)in.readObject();
         this.spriteSheet = SwingFXUtils.toFXImage(ImageIO.read(ImageIO.createImageInputStream(in)), null);
     }
+
 }
 

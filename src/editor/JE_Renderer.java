@@ -1,11 +1,14 @@
 package editor;
 
+import engine.J_InputHandler;
 import engine.J_Level;
 import engine.game_objects.J_GameObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.InputEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import engine.J_Log;
@@ -20,13 +23,15 @@ public class JE_Renderer
     private Timeline editorLoop = new Timeline();
     private KeyFrame tick;
 
+
     private static JE_Renderer instance = new JE_Renderer();
 
     private boolean running = false;
 
+    public JE_Controller controller;
+
     private JE_Renderer()
     {
-        //J_Log.debug("sceneview", "initializing");
         editorLoop.setCycleCount(Timeline.INDEFINITE);
         tick = new KeyFrame(Duration.millis(34), event ->
         {
@@ -44,12 +49,14 @@ public class JE_Renderer
     {
         this.canvas = canvas;
         this.gc = this.canvas.getGraphicsContext2D();
+        this.canvas.addEventHandler(InputEvent.ANY, J_InputHandler.GetInstance());
     }
+
+
     public void Run()
     {
         editorLoop.play();
     }
-
 
     public void Draw()
     {
@@ -65,10 +72,8 @@ public class JE_Renderer
     }
     public void Update()
     {
-        if(running)
-        {
-            level.Update((float)1/30);
-        }
+        level.Update((float)1/30);
+        //controller.UpdateOutliner();
     }
 
     public void SetRunning(boolean bool)

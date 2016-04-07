@@ -31,3 +31,41 @@
 {
     -fx-text-fill: #323232;
 }
+.side-panel
+{
+    -fx-border-width: 0 0 0 2px;
+    -fx-border-color: #404040;
+}
+.button-bar
+{
+    -fx-border-width: 2px 0;
+    -fx-border-color: #404040;
+}
+.debug-bar
+{
+    -fx-border-width: 2px 0 0 0;
+    -fx-border-color: #404040;
+}
+
+.scroll-bar:vertical .track,
+.scroll-bar:horizontal .track
+{
+    -fx-background-color: #323232;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 5px;
+    -fx-border-radius: 0px;
+}
+
+.scroll-bar:vertical .thumb,
+.scroll-bar:horizontal .thumb
+{
+    -fx-background-color: #ffa300;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 5px;
+}
+
+.scroll-bar:vertical,
+.scroll-bar:horizontal
+{
+    -fx-background-color: #404040;
+}

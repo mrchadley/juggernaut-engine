@@ -1,17 +1,24 @@
 package engine.game_objects;
 
+import editor.JE_Controller;
 import engine.J_Log;
 import engine.framework.J_Drawable;
 import engine.framework.J_Updatable;
 import engine.framework.Vector2;
 import engine.game_objects.render_components.J_RendererComponent;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 
 import java.io.*;
 import java.util.LinkedList;
@@ -98,12 +105,7 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
 
     public String toString()
     {
-        String out =  "[J_GameObject(" + name + "): transform=" + transform.toString() + " components={";
-        for(J_Component comp : components)
-        {
-            out.concat("\n\t" + components.toString());
-        }
-        return out + "}]";
+        return name;
     }
 
     @Override
@@ -124,6 +126,10 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
         components = (LinkedList<J_Component>) in.readObject();
 
         renderer.SetTransform(transform);
+        for (J_Component comp: components)
+        {
+            comp.SetTransform(transform);
+        }
         System.out.println(renderer.toString());
         System.out.println(transform.toString());
     }
@@ -173,20 +179,35 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
         return parent;
     }
 
-    public Node DisplayProperties()
+    public VBox GetProperties(JE_Controller controller)
     {
-        SplitPane properties = new SplitPane();
-        properties.setOrientation(Orientation.VERTICAL);
+        VBox properties = new VBox();
 
-        GridPane goPane = new GridPane();
+        GridPane gridPane = new GridPane();
+        gridPane.setPadding(new Insets(10,10,10,10));
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
 
         TextField nameField = new TextField(name);
+        nameField.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER)
+            {
+                name = nameField.getText();
+                controller.UpdateOutliner();
+            }
+        });
 
-        goPane.add(new Label("Username:"), 0, 0);
-        goPane.add(nameField, 1, 0);
+        gridPane.add(new Label("Name:"), 0, 0);
+        gridPane.add(nameField, 1, 0);
 
-        properties.getItems().add(goPane);
+        properties.getChildren().add(gridPane);
+        properties.getChildren().add(transform.GetProperties());
+        properties.getChildren().add(renderer.GetProperties());
 
+        for(J_Component comp : components)
+        {
+            properties.getChildren().add(comp.GetProperties());
+        }
         return properties;
     }
 }

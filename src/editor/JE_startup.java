@@ -1,6 +1,5 @@
 package editor;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,10 +7,8 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Pair;
 
 import java.io.File;
@@ -78,13 +75,15 @@ public class JE_startup {
         Optional<Pair<String, File>> result = newProjectDialog.showAndWait();
 
 
+
+        Stage main = FXMLLoader.load(getClass().getResource("juggernaut.fxml"));
+        main.setTitle(result.get().getKey() + " - " + defaultTitle);
+        main.show();
+        initial.close();
         /*
         if(name.get() != null)
         {
-            Stage main = FXMLLoader.load(getClass().getResource("juggernaut.fxml"));
-            main.setTitle(name.get() + " - " + defaultTitle);
-            main.show();
-            initial.close();
+
         } */
     }
 
