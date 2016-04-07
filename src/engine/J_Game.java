@@ -25,36 +25,32 @@ public abstract class J_Game extends Application
     @Override
     public void start(Stage primaryStage)
     {
+//        //load config
 
-
-        //load config
-        J_Level testLevel = Load();
-
-        try
-        {
-            testLevel.SaveLevel(new File("test.jLevel"));
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-        J_Level loadTestLevel = new J_Level();
-
-        try {
-            loadTestLevel.LoadLevel(new File("test.jLevel"));
-        }catch(IOException ioe)
-        {
-            ioe.printStackTrace();
-        }catch(ClassNotFoundException cnfe)
-        {
-            cnfe.printStackTrace();
-        }
+//
+//        try
+//        {
+//            testLevel.SaveLevel(new File("test.jLevel"));
+//        }
+//        catch (IOException e)
+//        {
+//            e.printStackTrace();
+//        }
+//
+//        J_Level loadTestLevel = new J_Level();
+//
+//        try {
+//            loadTestLevel.LoadLevel(new File("test.jLevel"));
+//        }catch(IOException ioe)
+//        {
+//            ioe.printStackTrace();
+//        }catch(ClassNotFoundException cnfe)
+//        {
+//            cnfe.printStackTrace();
+//        }
 
         //Initialize, SetLevel, Run,J_Engine
-        engine.Initialize(name, width, height, fps, primaryStage);
-        engine.SetLevel(loadTestLevel);
-        engine.Run();
+
     }
 
     public J_Level Load()
@@ -69,7 +65,7 @@ public abstract class J_Game extends Application
         oval.SetRenderer(new J_OvalRenderer(oval.GetTransform(), Color.BLACK, Color.RED));
         J_InputBinder binder = new J_InputBinder();
         binder.SetTransform(oval.GetTransform());
-        binder.AddKey(KeyCode.W, new Vector2(10, 0));
+        binder.AddKey(KeyCode.W, new Vector2(30, 0));
         oval.AddComponent(binder);
 
         J_GameObject rect = new J_GameObject("Rect", new J_Transform(new Vector2(250, 50), new Vector2(150, 50)));
@@ -120,6 +116,11 @@ public abstract class J_Game extends Application
 
 
         return level;
+    }
+
+    public J_Engine GetEngine()
+    {
+        return engine;
     }
 
     public static void main(String[] args)

@@ -2,6 +2,7 @@ package engine.game_objects;
 
 import editor.JE_Renderer;
 import engine.J_InputHandler;
+import engine.J_Log;
 import engine.framework.Vector2;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -38,11 +39,13 @@ public class J_InputBinder extends J_Component
     @Override
     public void Update(float dt)
     {
+        //J_Log.debug("input binder", "length: " + keyMap.size());
         for(Pair<KeyCode, Vector2> pair : keyMap)
         {
             if(inputHandler.GetKeyDown(pair.getKey()))
             {
                 transform.Move(pair.getValue().multiply(dt));
+                //J_Log.debug("input binder", "key pressed: " + pair.getKey() + ", " + pair.getValue());
             }
         }
     }
@@ -56,7 +59,10 @@ public class J_InputBinder extends J_Component
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
+        keyMap.clear();
         keyMap = (LinkedList<Pair<KeyCode,Vector2>>)in.readObject();
+        inputHandler = J_InputHandler.GetInstance();
+        J_Log.debug("input binder", keyMap.getFirst().getKey() + ", " + keyMap.getFirst().getValue());
     }
 
     @Override

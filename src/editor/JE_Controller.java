@@ -4,7 +4,9 @@ import editor.chatroom.ClientThread;
 import editor.chatroom.J_ChatController;
 import editor.chatroom.ServerThread;
 import engine.J_Level;
+import engine.TestGame;
 import engine.game_objects.J_GameObject;
+import engine.game_objects.J_Transform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
@@ -73,8 +75,12 @@ public class JE_Controller
         TreeItem<J_GameObject> root = new TreeItem<>();
         levelOutliner.setRoot(root);
         levelOutliner.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            TreeItem<J_GameObject> selectedObj = (TreeItem<J_GameObject>)newValue;
-            DisplayProperties(selectedObj.getValue());
+            if(newValue != null) {
+                TreeItem<J_GameObject> selectedObj = newValue;
+                DisplayProperties(selectedObj.getValue());
+            }else{
+                levelOutliner.getSelectionModel().select(oldValue);
+            }
         });
 
         UpdateOutliner();
@@ -126,7 +132,8 @@ public class JE_Controller
 
     public void test(ActionEvent actionEvent)
     {
-        renderer.SetRunning(!renderer.isRunning());
+        //renderer.SetRunning(!renderer.isRunning());
+        TestGame.LaunchGame(currentLevel);
     }
 
     public void NewLevel(ActionEvent actionEvent)
@@ -316,15 +323,6 @@ public class JE_Controller
             levelOutliner.getRoot().getChildren().add(item);
         }
     }
-    public void DisplayProperties(ActionEvent actionEvent)
-    {
-        Pane test = currentLevel.GetObjects().get(3).GetProperties(this);
-        ScrollPane scrollPane = new ScrollPane(test);
-        scrollPane.setPadding(new Insets(0, 10, 0, 10));
-        scrollPane.prefViewportHeightProperty().bind(propertiesTab.getTabPane().tabMaxHeightProperty());
-        propertiesTab.setContent(scrollPane);
-    }
-
     public void DisplayProperties(J_GameObject obj)
     {
         Pane test = obj.GetProperties(this);
@@ -332,5 +330,11 @@ public class JE_Controller
         scrollPane.setPadding(new Insets(0, 10, 0, 10));
         scrollPane.prefViewportHeightProperty().bind(propertiesTab.getTabPane().tabMaxHeightProperty());
         propertiesTab.setContent(scrollPane);
+    }
+
+    public void AddEmpty(ActionEvent actionEvent)
+    {
+        currentLevel.AddObject(new J_GameObject("Empty GameObject", new J_Transform()));
+        UpdateOutliner();
     }
 }

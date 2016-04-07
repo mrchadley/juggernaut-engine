@@ -32,15 +32,25 @@
                                     </items>
                                 </Menu>
                                 <Menu text="Edit"></Menu>
-                                <Menu text="GameObject">
-                                    <items>
-                                        <Menu text="Add...">
-                                            <MenuItem text="Empty GameObject"/>
-                                            <Menu text="Basic Shape"></Menu>
-                                        </Menu>
-                                    </items>
+                                <Menu text="Create">
+                                    <MenuItem text="Empty" onAction="#AddEmpty"/>
+                                    <SeparatorMenuItem/>
+                                    <MenuItem text="Oval"/>
+                                    <MenuItem text="Rectangle"/>
+                                    <SeparatorMenuItem/>
+                                    <MenuItem text="Sprite"/>
+                                    <MenuItem text="Animated Sprite"/>
                                 </Menu>
-                                <Menu text="Tools"></Menu>
+                                <Menu text="Extend">
+                                    <MenuItem text="Oval Renderer"/>
+                                    <MenuItem text="Rect. Renderer"/>
+                                    <SeparatorMenuItem/>
+                                    <MenuItem text="Sprite Renderer"/>
+                                    <MenuItem text="Sprite Animator"/>
+                                    <SeparatorMenuItem/>
+                                    <MenuItem text="Input Binder"/>
+
+                                </Menu>
                                 <Menu text="Window"></Menu>
                                 <Menu text="Help">
                                     <items>
@@ -53,7 +63,6 @@
                         <HBox prefHeight="50" styleClass="button-bar">
                             <padding><Insets top="5"/></padding>
                             <Button text="Play" onAction="#test"/>
-                            <Button text="TEST" onAction="#DisplayProperties"/>
                         </HBox>
                     </VBox>
                 </top>

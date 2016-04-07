@@ -53,7 +53,8 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
     public void Update(float dt)
     {
         transform.Update(dt);
-        renderer.Update(dt);
+        if(renderer != null)
+            renderer.Update(dt);
 
         for(J_Component comp : components)
         {
@@ -63,7 +64,8 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
     @Override
     public void Draw(GraphicsContext gc)
     {
-        renderer.Draw(gc);
+        if(renderer != null)
+            renderer.Draw(gc);
         /*
         for(J_Component comp : components)
         {
@@ -202,7 +204,8 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
 
         properties.getChildren().add(gridPane);
         properties.getChildren().add(transform.GetProperties());
-        properties.getChildren().add(renderer.GetProperties());
+        if(renderer != null)
+            properties.getChildren().add(renderer.GetProperties());
 
         for(J_Component comp : components)
         {

@@ -51,7 +51,6 @@ public class J_Engine
             //update, draw, handle input, etc/
             Update(time.GetDeltaTime());
             renderer.Draw(currentLevel);
-
             previousTime = currentTime;
             //J_Log.debug("j_engine", "looping, deltaTime = " + time.GetDeltaTime() + ", elapsedTime = " + time.GetElapsedTime());
         });

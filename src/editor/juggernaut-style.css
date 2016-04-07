@@ -1,4 +1,4 @@
-.menu,
+
 .context-menu,
 .menu-bar,
 .menu-button
@@ -6,6 +6,15 @@
     -fx-background-color: #323232;
 
 }
+.context-menu
+{
+    -fx-pref-width: 120px;
+}
+.context-menu .separator .line
+{
+    -fx-border-color: #404040;
+}
+
 .menu-button .label
 {
     -fx-text-fill: #ffa300;

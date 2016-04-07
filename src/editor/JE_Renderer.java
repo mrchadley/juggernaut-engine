@@ -30,10 +30,12 @@ public class JE_Renderer
 
     public JE_Controller controller;
 
+    private J_InputHandler inputHandler = J_InputHandler.GetInstance();
+
     private JE_Renderer()
     {
         editorLoop.setCycleCount(Timeline.INDEFINITE);
-        tick = new KeyFrame(Duration.millis(34), event ->
+        tick = new KeyFrame(Duration.seconds(1/30.0), event ->
         {
             Update();
             Draw();
@@ -47,15 +49,16 @@ public class JE_Renderer
     }
     public void SetCanvas(Canvas canvas)
     {
+        canvas.addEventHandler(InputEvent.ANY, J_InputHandler.GetInstance());
         this.canvas = canvas;
         this.gc = this.canvas.getGraphicsContext2D();
-        this.canvas.addEventHandler(InputEvent.ANY, J_InputHandler.GetInstance());
     }
 
 
     public void Run()
     {
         editorLoop.play();
+        canvas.addEventHandler(InputEvent.ANY, J_InputHandler.GetInstance());
     }
 
     public void Draw()
@@ -96,5 +99,9 @@ public class JE_Renderer
     public Canvas GetCanvas()
     {
         return canvas;
+    }
+    public J_InputHandler GetInput()
+    {
+        return inputHandler;
     }
 }

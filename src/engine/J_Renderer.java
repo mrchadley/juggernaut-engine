@@ -41,7 +41,7 @@ public class J_Renderer{
     public void Clear()
     {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        gc.setFill(Color.rgb(100, 100, 150));
+        gc.setFill(Color.rgb(60, 60, 190));
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
