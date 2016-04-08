@@ -5,8 +5,12 @@ import editor.chatroom.J_ChatController;
 import editor.chatroom.ServerThread;
 import engine.J_Level;
 import engine.TestGame;
+import engine.framework.Vector2;
 import engine.game_objects.J_GameObject;
 import engine.game_objects.J_Transform;
+import engine.game_objects.render_components.J_OvalRenderer;
+import engine.game_objects.render_components.J_RectangleRenderer;
+import engine.game_objects.render_components.J_SpriteRenderer;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
@@ -334,7 +338,28 @@ public class JE_Controller
 
     public void AddEmpty(ActionEvent actionEvent)
     {
-        currentLevel.AddObject(new J_GameObject("Empty GameObject", new J_Transform()));
+        currentLevel.AddObject(new J_GameObject("Empty", new J_Transform(new Vector2(), new Vector2(50, 50))));
+        UpdateOutliner();
+    }
+    public void AddOval(ActionEvent actionEvent)
+    {
+        J_GameObject oval = new J_GameObject("Oval", new J_Transform(new Vector2(25, 25), new Vector2(50, 50)));
+        oval.SetRenderer(new J_OvalRenderer(oval.GetTransform(), Color.web("#ffa300"), Color.web("323232")));
+        currentLevel.AddObject(oval);
+        UpdateOutliner();
+    }
+    public void AddRect(ActionEvent actionEvent)
+    {
+        J_GameObject rect = new J_GameObject("Rect", new J_Transform(new Vector2(25, 25), new Vector2(50, 50)));
+        rect.SetRenderer(new J_RectangleRenderer(rect.GetTransform(), Color.web("#ffa300"), Color.web("323232")));
+        currentLevel.AddObject(rect);
+        UpdateOutliner();
+    }
+    public void AddSprite(ActionEvent actionEvent)
+    {
+        J_GameObject sprite = new J_GameObject("Sprite", new J_Transform(new Vector2(25, 25), new Vector2(50, 50)));
+        sprite.SetRenderer(new J_SpriteRenderer(sprite.GetTransform()));
+        currentLevel.AddObject(sprite);
         UpdateOutliner();
     }
 }

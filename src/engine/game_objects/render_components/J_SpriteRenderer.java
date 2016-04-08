@@ -2,6 +2,7 @@ package engine.game_objects.render_components;
 
 import engine.framework.Vector2;
 import engine.game_objects.J_Transform;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -9,11 +10,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
+import java.io.*;
 
 public class J_SpriteRenderer extends J_RendererComponent
 {
@@ -24,16 +26,22 @@ public class J_SpriteRenderer extends J_RendererComponent
 
     }
 
-    public J_SpriteRenderer(J_Transform transform, Image sprite)
+    public J_SpriteRenderer(J_Transform transform, Image img)
     {
         super(transform);
-        this.sprite = new J_SpriteAnimation(sprite, new Vector2((float)sprite.getWidth(), (float)sprite.getHeight()), 1, 0);
+        sprite = new J_SpriteAnimation(img, new Vector2((float)img.getWidth(), (float)img.getHeight()), 1, 0);
+    }
+    public J_SpriteRenderer(J_Transform transform)
+    {
+        super(transform);
     }
 
     @Override
     public void Draw(GraphicsContext gc)
     {
-        gc.drawImage(sprite.GetSpriteSheet(), transform.GetCorner().getX(), transform.GetCorner().getY(), transform.GetSize().getX(), transform.GetSize().getY());
+        if(sprite != null) {
+            gc.drawImage(sprite.GetSpriteSheet(), transform.GetCorner().getX(), transform.GetCorner().getY(), transform.GetSize().getX(), transform.GetSize().getY());
+        }
     }
 
     @Override
@@ -68,9 +76,23 @@ public class J_SpriteRenderer extends J_RendererComponent
         spriteRendererContent.setHgap(5);
         spriteRendererContent.setVgap(5);
 
-        ImageView current = new ImageView(sprite.GetSpriteSheet());
+        ImageView current = new ImageView();
+        if(sprite != null)
+            current = new ImageView(sprite.GetSpriteSheet());
         current.setPreserveRatio(true);
         current.setFitHeight(200);
+        current.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            //open file chooser
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialDirectory(new File("."));
+            try {
+                Image img = new Image(new FileInputStream(fileChooser.showOpenDialog(null)));
+                sprite = new J_SpriteAnimation(img);
+            }catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        });
 
         ScrollPane scroll = new ScrollPane(current);
         scroll.setPrefWidth(250);

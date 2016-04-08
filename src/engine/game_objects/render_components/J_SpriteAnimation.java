@@ -37,6 +37,13 @@ public class J_SpriteAnimation implements Externalizable
         this.frameCount = frameCount;
         this.frameLength = frameLength;
     }
+    public J_SpriteAnimation(Image spriteSheet)
+    {
+        this.spriteSheet = spriteSheet;
+        this.frameSize = new Vector2((float)spriteSheet.getWidth(), (float)spriteSheet.getHeight());
+        this.frameCount = 1;
+        this.frameLength = 0;
+    }
 
     public void NextFrame()
     {

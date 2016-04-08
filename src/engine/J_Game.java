@@ -25,29 +25,7 @@ public abstract class J_Game extends Application
     @Override
     public void start(Stage primaryStage)
     {
-//        //load config
 
-//
-//        try
-//        {
-//            testLevel.SaveLevel(new File("test.jLevel"));
-//        }
-//        catch (IOException e)
-//        {
-//            e.printStackTrace();
-//        }
-//
-//        J_Level loadTestLevel = new J_Level();
-//
-//        try {
-//            loadTestLevel.LoadLevel(new File("test.jLevel"));
-//        }catch(IOException ioe)
-//        {
-//            ioe.printStackTrace();
-//        }catch(ClassNotFoundException cnfe)
-//        {
-//            cnfe.printStackTrace();
-//        }
 
         //Initialize, SetLevel, Run,J_Engine
 

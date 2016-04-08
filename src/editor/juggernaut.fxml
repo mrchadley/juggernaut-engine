@@ -35,10 +35,10 @@
                                 <Menu text="Create">
                                     <MenuItem text="Empty" onAction="#AddEmpty"/>
                                     <SeparatorMenuItem/>
-                                    <MenuItem text="Oval"/>
-                                    <MenuItem text="Rectangle"/>
+                                    <MenuItem text="Oval" onAction="#AddOval"/>
+                                    <MenuItem text="Rectangle" onAction="#AddRect"/>
                                     <SeparatorMenuItem/>
-                                    <MenuItem text="Sprite"/>
+                                    <MenuItem text="Sprite" onAction="#AddSprite"/>
                                     <MenuItem text="Animated Sprite"/>
                                 </Menu>
                                 <Menu text="Extend">

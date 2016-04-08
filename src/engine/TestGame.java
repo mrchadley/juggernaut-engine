@@ -2,6 +2,9 @@ package engine;
 
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.IOException;
+
 
 public class TestGame extends J_Game
 {
@@ -16,8 +19,20 @@ public class TestGame extends J_Game
     @Override
     public void start(Stage primaryStage)
     {
+        //load config
+
+        level = Load();
+        try
+        {
+            level.SaveLevel(new File("test.jLevel"));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
 
         engine.Initialize(name, width, height, fps, primaryStage);
+        engine.SetLevel(level);
         engine.Run();
     }
     public static void main(String[] args)
