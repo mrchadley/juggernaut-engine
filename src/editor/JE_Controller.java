@@ -1,42 +1,36 @@
 package editor;
 
 import editor.chatroom.ClientThread;
-import editor.chatroom.J_ChatController;
 import editor.chatroom.ServerThread;
+import engine.J_Game;
 import engine.J_Level;
 import engine.TestGame;
 import engine.framework.Vector2;
 import engine.game_objects.J_GameObject;
 import engine.game_objects.J_Transform;
-import engine.game_objects.render_components.J_OvalRenderer;
-import engine.game_objects.render_components.J_RectangleRenderer;
-import engine.game_objects.render_components.J_SpriteRenderer;
-import javafx.fxml.FXMLLoader;
+import engine.game_objects.render_components.*;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.control.ComboBox;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Pair;
-
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 
@@ -59,7 +53,6 @@ public class JE_Controller
 
     private final String defaultTitle = "Juggernaut Engine [Editor]";
 
-    Map<String, Color> colors = new HashMap<String, Color>();
     private JE_Renderer renderer = JE_Renderer.GetInstance();
     private J_Level currentLevel = new J_Level();
 
@@ -80,10 +73,7 @@ public class JE_Controller
         levelOutliner.setRoot(root);
         levelOutliner.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue != null) {
-                TreeItem<J_GameObject> selectedObj = newValue;
-                DisplayProperties(selectedObj.getValue());
-            }else{
-                levelOutliner.getSelectionModel().select(oldValue);
+                DisplayProperties(newValue.getValue());
             }
         });
 
@@ -133,13 +123,11 @@ public class JE_Controller
             e.printStackTrace();
         }*/
     }
-
     public void test(ActionEvent actionEvent)
     {
         //renderer.SetRunning(!renderer.isRunning());
         TestGame.LaunchGame(currentLevel);
     }
-
     public void NewLevel(ActionEvent actionEvent)
     {
         Alert newLevelAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -335,7 +323,6 @@ public class JE_Controller
         scrollPane.prefViewportHeightProperty().bind(propertiesTab.getTabPane().tabMaxHeightProperty());
         propertiesTab.setContent(scrollPane);
     }
-
     public void AddEmpty(ActionEvent actionEvent)
     {
         currentLevel.AddObject(new J_GameObject("Empty", new J_Transform(new Vector2(), new Vector2(50, 50))));
@@ -359,7 +346,48 @@ public class JE_Controller
     {
         J_GameObject sprite = new J_GameObject("Sprite", new J_Transform(new Vector2(25, 25), new Vector2(50, 50)));
         sprite.SetRenderer(new J_SpriteRenderer(sprite.GetTransform()));
+        _AddSpriteRenderer(sprite);
         currentLevel.AddObject(sprite);
         UpdateOutliner();
     }
+    public void AddAnimatedSprite(ActionEvent actionEvent)
+    {
+        J_GameObject sprite = new J_GameObject("Sprite", new J_Transform(new Vector2(25, 25), new Vector2(50, 50)));
+        sprite.SetRenderer(new J_SpriteAnimator(sprite.GetTransform()));
+        currentLevel.AddObject(sprite);
+        UpdateOutliner();
+    }
+
+
+    public void AddOvalRenderer(ActionEvent actionEvent){}
+    public void AddRectRenderer(ActionEvent actionEvent){}
+    public void AddSpriteRenderer(ActionEvent actionEvent)
+    {
+        if(levelOutliner.getSelectionModel().getSelectedItem() != null)
+            _AddSpriteRenderer(levelOutliner.getSelectionModel().getSelectedItem().getValue());
+    }
+    public void _AddSpriteRenderer(J_GameObject obj)
+    {
+        J_SpriteRenderer renderer = new J_SpriteRenderer(obj.GetTransform());
+        _AddSpriteAnimation(renderer);
+        obj.SetRenderer(renderer);
+    }
+    public void AddSpriteAnimator(ActionEvent actionEvent){}
+
+    public void AddInputBinder(ActionEvent actionEvent){}
+
+    public void AddSpriteAnimation(ActionEvent actionEvent){}
+    public void _AddSpriteAnimation(J_SpriteRenderer spriteRenderer)
+    {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("."));
+        try {
+            Image img = new Image(new FileInputStream(fileChooser.showOpenDialog(null)));
+            spriteRenderer.SetSprite(new J_SpriteAnimation(img));
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public void _AddSpriteAnimation(J_SpriteAnimator spriteAnimator){}
 }

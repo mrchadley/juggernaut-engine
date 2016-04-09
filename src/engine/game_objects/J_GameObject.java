@@ -144,7 +144,6 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
         this.name = name;
     }
 
-
     public void SetParent(J_GameObject parent)
     {
         parent.AddChild(this);

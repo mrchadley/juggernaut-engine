@@ -2,9 +2,9 @@ package engine.game_objects.render_components;
 
 import engine.framework.Vector2;
 import engine.game_objects.J_Transform;
-import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
@@ -13,8 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
-import javafx.stage.Window;
-
 import java.io.*;
 
 public class J_SpriteRenderer extends J_RendererComponent
@@ -25,7 +23,6 @@ public class J_SpriteRenderer extends J_RendererComponent
     {
 
     }
-
     public J_SpriteRenderer(J_Transform transform, Image img)
     {
         super(transform);
@@ -81,7 +78,9 @@ public class J_SpriteRenderer extends J_RendererComponent
             current = new ImageView(sprite.GetSpriteSheet());
         current.setPreserveRatio(true);
         current.setFitHeight(200);
-        current.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
+        Button imgButton = new Button("Change");
+        imgButton.setOnAction(event ->{
             //open file chooser
             FileChooser fileChooser = new FileChooser();
             fileChooser.setInitialDirectory(new File("."));
@@ -96,9 +95,10 @@ public class J_SpriteRenderer extends J_RendererComponent
 
         ScrollPane scroll = new ScrollPane(current);
         scroll.setPrefWidth(250);
-
+        GridPane.setColumnSpan(scroll,2);
 
         spriteRendererContent.add(new Label("Sprite:"), 0, 0);
+        spriteRendererContent.add(imgButton, 1, 0);
         spriteRendererContent.add(scroll, 0, 1);
 
         spriteRendererPane.setContent(spriteRendererContent);
