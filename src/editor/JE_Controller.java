@@ -7,6 +7,7 @@ import engine.J_Level;
 import engine.TestGame;
 import engine.framework.Vector2;
 import engine.game_objects.J_GameObject;
+import engine.game_objects.J_InputBinder;
 import engine.game_objects.J_Transform;
 import engine.game_objects.render_components.*;
 import javafx.geometry.Insets;
@@ -357,10 +358,22 @@ public class JE_Controller
         currentLevel.AddObject(sprite);
         UpdateOutliner();
     }
-
-
-    public void AddOvalRenderer(ActionEvent actionEvent){}
-    public void AddRectRenderer(ActionEvent actionEvent){}
+    public void AddOvalRenderer(ActionEvent actionEvent)
+    {
+        if(levelOutliner.getSelectionModel().getSelectedItem() != null)
+        {
+            J_GameObject obj = levelOutliner.getSelectionModel().getSelectedItem().getValue();
+            obj.SetRenderer(new J_OvalRenderer(obj.GetTransform(), Color.web("#ffa300"), Color.web("323232")));
+        }
+    }
+    public void AddRectRenderer(ActionEvent actionEvent)
+    {
+        if(levelOutliner.getSelectionModel().getSelectedItem() != null)
+        {
+            J_GameObject obj = levelOutliner.getSelectionModel().getSelectedItem().getValue();
+            obj.SetRenderer(new J_RectangleRenderer(obj.GetTransform(), Color.web("#ffa300"), Color.web("323232")));
+        }
+    }
     public void AddSpriteRenderer(ActionEvent actionEvent)
     {
         if(levelOutliner.getSelectionModel().getSelectedItem() != null)
@@ -372,11 +385,45 @@ public class JE_Controller
         _AddSpriteAnimation(renderer);
         obj.SetRenderer(renderer);
     }
-    public void AddSpriteAnimator(ActionEvent actionEvent){}
+    public void AddSpriteAnimator(ActionEvent actionEvent)
+    {
+        if(levelOutliner.getSelectionModel().getSelectedItem() != null)
+        {
+            _AddSpriteAnimator(levelOutliner.getSelectionModel().getSelectedItem().getValue());
+        }
+    }
+    public void _AddSpriteAnimator(J_GameObject obj)
+    {
+        J_SpriteAnimator animator = new J_SpriteAnimator(obj.GetTransform());
+        _AddSpriteAnimation(animator);
+        obj.SetRenderer(animator);
+    }
+    public void AddInputBinder(ActionEvent actionEvent)
+    {
+        if(levelOutliner.getSelectionModel().getSelectedItem() != null)
+        {
+            J_GameObject obj = levelOutliner.getSelectionModel().getSelectedItem().getValue();
+            J_InputBinder binder = new J_InputBinder();
+            binder.SetTransform(obj.GetTransform());
+            obj.AddComponent(binder);
+        }
+    }
 
-    public void AddInputBinder(ActionEvent actionEvent){}
-
-    public void AddSpriteAnimation(ActionEvent actionEvent){}
+    public void AddSpriteAnimation(ActionEvent actionEvent)
+    {
+        if(levelOutliner.getSelectionModel().getSelectedItem() != null)
+        {
+            J_GameObject obj = levelOutliner.getSelectionModel().getSelectedItem().getValue();
+            if(obj.GetRenderer().getClass() == J_SpriteRenderer.class)
+            {
+                _AddSpriteAnimation((J_SpriteRenderer)obj.GetRenderer());
+            }
+            else if(obj.GetRenderer().getClass() == J_SpriteAnimator.class)
+            {
+                _AddSpriteAnimation((J_SpriteAnimator) obj.GetRenderer());
+            }
+        }
+    }
     public void _AddSpriteAnimation(J_SpriteRenderer spriteRenderer)
     {
         FileChooser fileChooser = new FileChooser();
@@ -389,5 +436,17 @@ public class JE_Controller
             e.printStackTrace();
         }
     }
-    public void _AddSpriteAnimation(J_SpriteAnimator spriteAnimator){}
+    public void _AddSpriteAnimation(J_SpriteAnimator spriteAnimator)
+    {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("."));
+        try {
+            Image img = new Image(new FileInputStream(fileChooser.showOpenDialog(null)));
+            spriteAnimator.AddAnimation(new J_SpriteAnimation(img));
+            spriteAnimator.PlayAnimation(spriteAnimator.GetAnimations().size() - 1);
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

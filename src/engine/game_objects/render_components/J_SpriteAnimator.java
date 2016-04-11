@@ -71,7 +71,11 @@ public class J_SpriteAnimator extends J_RendererComponent
         return xPosition;
     }
 
-    public void AddAnimation( J_SpriteAnimation animation)
+    public LinkedList<J_SpriteAnimation> GetAnimations() {
+        return animations;
+    }
+
+    public void AddAnimation(J_SpriteAnimation animation)
     {
         animations.add(animation);
     }

@@ -2,6 +2,7 @@ package engine.game_objects;
 
 import editor.JE_Controller;
 import engine.J_Log;
+import engine.J_Renderer;
 import engine.framework.J_Drawable;
 import engine.framework.J_Updatable;
 import engine.framework.Vector2;
@@ -80,6 +81,11 @@ public class J_GameObject implements J_Updatable, J_Drawable, Externalizable
     public J_Transform GetTransform()
     {
         return transform;
+    }
+
+    public J_RendererComponent GetRenderer()
+    {
+        return renderer;
     }
 
     public J_Component GetComponent(int index)

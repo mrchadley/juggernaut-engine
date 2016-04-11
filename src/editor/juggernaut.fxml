@@ -39,16 +39,16 @@
                                     <MenuItem text="Rectangle" onAction="#AddRect"/>
                                     <SeparatorMenuItem/>
                                     <MenuItem text="Sprite" onAction="#AddSprite"/>
-                                    <MenuItem text="Animated Sprite"/>
+                                    <MenuItem text="Animated Sprite" onAction="#AddAnimatedSprite"/>
                                 </Menu>
                                 <Menu text="Extend">
-                                    <MenuItem text="Oval Renderer"/>
-                                    <MenuItem text="Rect. Renderer"/>
+                                    <MenuItem text="Oval Renderer" onAction="#AddOvalRenderer"/>
+                                    <MenuItem text="Rect. Renderer" onAction="#AddRectRenderer"/>
                                     <SeparatorMenuItem/>
-                                    <MenuItem text="Sprite Renderer"/>
-                                    <MenuItem text="Sprite Animator"/>
+                                    <MenuItem text="Sprite Renderer" onAction="#AddSpriteRenderer"/>
+                                    <MenuItem text="Sprite Animator" onAction="#AddSpriteAnimator"/>
                                     <SeparatorMenuItem/>
-                                    <MenuItem text="Input Binder"/>
+                                    <MenuItem text="Input Binder" onAction="#AddInputBinder"/>
 
                                 </Menu>
                                 <Menu text="Window"></Menu>
