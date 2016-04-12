@@ -9,7 +9,7 @@ SOCKET I/O -> chatroom
 MULTITHREADING -> chatroom
 
 ***SPECIAL INSTRUCTIONS***
-\rrun J_Editor.java from the editor package
+run J_Editor.java from the editor package
 
 when adding components to an object from the extend menu,
 you must have a second object in the outliner tab and switch between
