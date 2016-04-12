@@ -1,5 +1,5 @@
-Marc Tremblay
-Austin Oligario
+Marc Tremblay(mrchadley)
+Austin Oligario(AustinOlig)
 
 https://github.com/mrchadley/juggernaut-engine.git
 
