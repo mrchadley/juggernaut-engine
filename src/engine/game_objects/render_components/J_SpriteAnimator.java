@@ -4,11 +4,10 @@ import engine.game_objects.J_Transform;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -115,42 +114,44 @@ public class J_SpriteAnimator extends J_RendererComponent
         spriteAnimatorPane.setText("Sprite Animator");
 
         GridPane spriteAnimatorContent = new GridPane();
-        spriteAnimatorContent.setPadding(new Insets(10,15,10,15));
+        spriteAnimatorContent.setPadding(new Insets(10,0,10,0));
         spriteAnimatorContent.setHgap(5);
         spriteAnimatorContent.setVgap(5);
 
-        ImageView current = new ImageView(currentAnim.GetSpriteSheet());
-        current.setPreserveRatio(true);
-        current.setFitHeight(200);
+        spriteAnimatorContent.add(new Label("     Current Animation:"), 0, 0);
+        TextField curr = new TextField(animations.indexOf(currentAnim) + "");
+        curr.setOnAction(event -> {
+            int index = Integer.parseInt(curr.getText());
 
-        ScrollPane scroll = new ScrollPane(current);
-        scroll.setPrefWidth(250);
+            if(index < animations.size() && index >= 0)
+                currentAnim = animations.get(index);
+            else
+                curr.setText(animations.indexOf(currentAnim) + "");
+        });
+        spriteAnimatorContent.add(curr, 1, 0);
 
-        System.out.println(animations.size());
+        Pane currAnim = currentAnim.GetProperties();
 
-        spriteAnimatorContent.add(new Label("Current Animation:"), 0, 0);
-        spriteAnimatorContent.add(scroll, 0, 1);
+        GridPane.setColumnSpan(currAnim, 2);
+        spriteAnimatorContent.add(currAnim, 0, 1);
 
-        spriteAnimatorContent.add(new Label("All:"), 0, 2);
+        TitledPane all = new TitledPane();
+        all.setText("All Animations");
+
+        GridPane allContent = new GridPane();
+        allContent.setPadding(new Insets(0,0,0,0));
+        allContent.setHgap(5);
+        allContent.setVgap(5);
 
         int i = 0;
         for(J_SpriteAnimation anim : animations)
         {
-            ImageView others = new ImageView(animations.get(i).GetSpriteSheet());
-            others.setPreserveRatio(true);
-            others.setFitHeight(200);
-
-            VBox panel = new VBox(3);
-            panel.setPadding(new Insets(0,0,0,0));
-            panel.setPrefWidth(250);
-            panel.getChildren().add(new Label((i + 1) + ""));
-            ScrollPane animScroll = new ScrollPane(others);
-            animScroll.setPrefWidth(250);
-            panel.getChildren().add(animScroll);
-
-            spriteAnimatorContent.add(panel, 0, i + 3);
+            allContent.add(anim.GetProperties(), 0, i);
             i++;
         }
+        all.setContent(allContent);
+        GridPane.setColumnSpan(all, 2);
+        spriteAnimatorContent.add(all, 0, 2);
 
         spriteAnimatorPane.setContent(spriteAnimatorContent);
 

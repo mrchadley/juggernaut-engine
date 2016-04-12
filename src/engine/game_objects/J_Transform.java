@@ -130,22 +130,16 @@ public class J_Transform extends J_Component {
         TextField xPosField = new TextField(localPosition.getX() + "");
         xPosField.setPrefWidth(75);
         xPosField.setOnKeyPressed(event -> {
-            if(event.getCode() == KeyCode.ENTER)
+            if(event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.TAB)
             {
-                System.out.println("text: " + xPosField.getText());
-                System.out.println("float: " + Float.parseFloat(xPosField.getText()));
-
                 localPosition.setX(Float.parseFloat(xPosField.getText()));
-                System.out.println("localPosX: " + localPosition.getX());
-                System.out.println("centerPosX: " + positionCenter.getX());
-                System.out.println("posX: " + position.getX());
             }
         });
 
         TextField yPosField = new TextField(localPosition.getY() + "");
         yPosField.setPrefWidth(75);
         yPosField.setOnKeyPressed(event -> {
-            if(event.getCode() == KeyCode.ENTER)
+            if(event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.TAB)
             {
                 localPosition.setY(Float.parseFloat(yPosField.getText()));
             }
@@ -154,7 +148,7 @@ public class J_Transform extends J_Component {
         TextField xSizeField = new TextField(size.getX() + "");
         xSizeField.setPrefWidth(75);
         xSizeField.setOnKeyPressed(event -> {
-            if(event.getCode() == KeyCode.ENTER)
+            if(event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.TAB)
             {
                 size.setX(Float.parseFloat(xSizeField.getText()));
             }
@@ -163,7 +157,7 @@ public class J_Transform extends J_Component {
         TextField ySizeField = new TextField(size.getY() + "");
         ySizeField.setPrefWidth(75);
         ySizeField.setOnKeyPressed(event -> {
-            if(event.getCode() == KeyCode.ENTER)
+            if(event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.TAB)
             {
                 size.setY(Float.parseFloat(ySizeField.getText()));
             }

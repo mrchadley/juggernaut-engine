@@ -1,10 +1,13 @@
+.tab-pane, .pane
+{
+    -fx-background-color: #323232;
+}
 
 .context-menu,
 .menu-bar,
 .menu-button
 {
-    -fx-background-color: #323232;
-
+    -fx-background-color: #404040;
 }
 .context-menu
 {
@@ -12,7 +15,7 @@
 }
 .context-menu .separator .line
 {
-    -fx-border-color: #404040;
+    -fx-border-color: #474747;
 }
 
 .menu-button .label
@@ -49,6 +52,7 @@
 {
     -fx-border-width: 2px 0;
     -fx-border-color: #404040;
+    -fx-background-color: #323232;
 }
 .debug-bar
 {

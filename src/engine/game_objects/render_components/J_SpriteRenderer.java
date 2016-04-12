@@ -68,40 +68,7 @@ public class J_SpriteRenderer extends J_RendererComponent
         TitledPane spriteRendererPane = new TitledPane();
         spriteRendererPane.setText("Sprite Renderer");
 
-        GridPane spriteRendererContent = new GridPane();
-        spriteRendererContent.setPadding(new Insets(10,15,10,15));
-        spriteRendererContent.setHgap(5);
-        spriteRendererContent.setVgap(5);
-
-        ImageView current = new ImageView();
-        if(sprite != null)
-            current = new ImageView(sprite.GetSpriteSheet());
-        current.setPreserveRatio(true);
-        current.setFitHeight(200);
-
-        Button imgButton = new Button("Change");
-        imgButton.setOnAction(event ->{
-            //open file chooser
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setInitialDirectory(new File("."));
-            try {
-                Image img = new Image(new FileInputStream(fileChooser.showOpenDialog(null)));
-                sprite = new J_SpriteAnimation(img);
-            }catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        });
-
-        ScrollPane scroll = new ScrollPane(current);
-        scroll.setPrefWidth(250);
-        GridPane.setColumnSpan(scroll,2);
-
-        spriteRendererContent.add(new Label("Sprite:"), 0, 0);
-        spriteRendererContent.add(imgButton, 1, 0);
-        spriteRendererContent.add(scroll, 0, 1);
-
-        spriteRendererPane.setContent(spriteRendererContent);
+        spriteRendererPane.setContent(sprite.GetProperties());
 
         return spriteRendererPane;
     }

@@ -65,7 +65,9 @@ public class J_RectangleRenderer extends J_ShapeRenderer
         rectRendererContent.setVgap(5);
 
         ColorPicker strokePicker = new ColorPicker(stroke);
+        strokePicker.setOnAction(event -> stroke = strokePicker.getValue());
         ColorPicker fillPicker = new ColorPicker(fill);
+        fillPicker.setOnAction(event -> fill = fillPicker.getValue());
 
         rectRendererContent.add(new Label("Stroke:"), 0, 0);
         rectRendererContent.add(strokePicker, 1, 0);

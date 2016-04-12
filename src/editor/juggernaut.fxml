@@ -47,6 +47,7 @@
                                     <SeparatorMenuItem/>
                                     <MenuItem text="Sprite Renderer" onAction="#AddSpriteRenderer"/>
                                     <MenuItem text="Sprite Animator" onAction="#AddSpriteAnimator"/>
+                                    <MenuItem text="Sprite Animation" onAction="#AddSpriteAnimation"/>
                                     <SeparatorMenuItem/>
                                     <MenuItem text="Input Binder" onAction="#AddInputBinder"/>
 

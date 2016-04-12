@@ -76,7 +76,7 @@ public class Vector2 implements Externalizable
     @Override
     public String toString()
     {
-        return "[Vector2: x=" + x + " y=" + y + "]";
+        return "(" + x + ", " + y + ")";
     }
 
     @Override

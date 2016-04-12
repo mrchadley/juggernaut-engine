@@ -353,8 +353,9 @@ public class JE_Controller
     }
     public void AddAnimatedSprite(ActionEvent actionEvent)
     {
-        J_GameObject sprite = new J_GameObject("Sprite", new J_Transform(new Vector2(25, 25), new Vector2(50, 50)));
-        sprite.SetRenderer(new J_SpriteAnimator(sprite.GetTransform()));
+        J_GameObject sprite = new J_GameObject("Animated Sprite", new J_Transform(new Vector2(25, 25), new Vector2(50, 50)));
+        _AddSpriteAnimator(sprite);
+
         currentLevel.AddObject(sprite);
         UpdateOutliner();
     }
@@ -408,7 +409,6 @@ public class JE_Controller
             obj.AddComponent(binder);
         }
     }
-
     public void AddSpriteAnimation(ActionEvent actionEvent)
     {
         if(levelOutliner.getSelectionModel().getSelectedItem() != null)

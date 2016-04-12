@@ -4,8 +4,11 @@ import editor.JE_Renderer;
 import engine.J_InputHandler;
 import engine.J_Log;
 import engine.framework.Vector2;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
@@ -19,7 +22,7 @@ import java.util.LinkedList;
 public class J_InputBinder extends J_Component
 {
     private J_Transform transform;
-    private LinkedList<Pair<KeyCode, Vector2>> keyMap = new LinkedList<>();
+    private ObservableList<Pair<KeyCode, Vector2>> keyMap = FXCollections.observableArrayList();
     private J_InputHandler inputHandler;
 
     public J_InputBinder()
@@ -60,9 +63,8 @@ public class J_InputBinder extends J_Component
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         keyMap.clear();
-        keyMap = (LinkedList<Pair<KeyCode,Vector2>>)in.readObject();
+        keyMap = (ObservableList<Pair<KeyCode,Vector2>>)in.readObject();
         inputHandler = J_InputHandler.GetInstance();
-        J_Log.debug("input binder", keyMap.getFirst().getKey() + ", " + keyMap.getFirst().getValue());
     }
 
     @Override
@@ -81,16 +83,21 @@ public class J_InputBinder extends J_Component
         GridPane.setColumnSpan(bindings, 4);
         inputBinderContent.add(bindings, 0, 0);
 
-        ListView<KeyCode> list = new ListView<>();
-        int i = 0;
-        for(Pair<KeyCode, Vector2> pair : keyMap)
-        {
-            list.getItems().add(pair.getKey());
-            i++;
-        }
-        list.setPrefWidth(250);
-        GridPane.setColumnSpan(list, 7);
-        inputBinderContent.add(list, 0, 1);
+        TableView<Pair<KeyCode, Vector2>> table = new TableView();
+
+        TableColumn keyCode = new TableColumn("KEY");
+        keyCode.setCellValueFactory(new PropertyValueFactory<>("key"));
+        keyCode.setPrefWidth(125);
+        TableColumn vel = new TableColumn("VELOCITY");
+        vel.setCellValueFactory(new PropertyValueFactory<>("value"));
+        vel.setPrefWidth(125);
+
+        table.setItems(keyMap);
+        table.getColumns().addAll(keyCode, vel);
+
+        table.setPrefWidth(250);
+        GridPane.setColumnSpan(table, 7);
+        inputBinderContent.add(table, 0, 1);
 
         ComboBox<KeyCode> key = new ComboBox<>();
         key.getItems().setAll(KeyCode.values());
@@ -101,15 +108,28 @@ public class J_InputBinder extends J_Component
         TextField yVel = new TextField();
         yVel.setPrefWidth(75);
         Button add = new Button("Add");
+        add.setOnAction(event ->{
+            KeyCode newKey = key.getSelectionModel().getSelectedItem();
+            float xV = Float.parseFloat(xVel.getText());
+            float yV = Float.parseFloat(yVel.getText());
+            if(newKey != null)
+            {
+                AddKey(newKey, new Vector2(xV, yV));
+                xVel.clear();
+                yVel.clear();
+            }
+        });
         add.setPrefWidth(75);
 
-        inputBinderContent.add(new Label("Key:"), 0, 2);
-        inputBinderContent.add(key, 1, 2);
-        inputBinderContent.add(new Label("x:"), 2, 2);
-        inputBinderContent.add(xVel, 3, 2);
-        inputBinderContent.add(new Label("y:"), 4, 2);
-        inputBinderContent.add(yVel, 5, 2);
-        inputBinderContent.add(add, 6, 2);
+        Label keyLabel = new Label("Key:");
+        keyLabel.setPrefWidth(75);
+        inputBinderContent.add(keyLabel, 0, 3);
+        inputBinderContent.add(key, 1, 3);
+        inputBinderContent.add(new Label("x:"), 0, 2);
+        inputBinderContent.add(xVel, 1, 2);
+        inputBinderContent.add(new Label("y:"), 2, 2);
+        inputBinderContent.add(yVel, 3, 2);
+        inputBinderContent.add(add, 3, 3);
 
         inputBinderPane.setContent(inputBinderContent);
 

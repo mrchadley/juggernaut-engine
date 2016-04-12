@@ -38,7 +38,6 @@ public class J_OvalRenderer extends J_ShapeRenderer
 
     }
 
-
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         super.writeExternal(out);
@@ -67,7 +66,9 @@ public class J_OvalRenderer extends J_ShapeRenderer
         ovalRendererContent.setVgap(5);
 
         ColorPicker strokePicker = new ColorPicker(stroke);
+        strokePicker.setOnAction(event -> stroke = strokePicker.getValue());
         ColorPicker fillPicker = new ColorPicker(fill);
+        fillPicker.setOnAction(event -> fill = fillPicker.getValue());
 
         ovalRendererContent.add(new Label("Stroke:"), 0, 0);
         ovalRendererContent.add(strokePicker, 1, 0);
